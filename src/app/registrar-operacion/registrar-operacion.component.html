@@ -1,0 +1,80 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Registro de Operaciones</h3>
+    <form (ngSubmit)= "onSubmit()" #operacionForm = "ngForm">
+      <div class="form-group">
+        <label>Nombre : </label>
+        <input type = "text"
+        class="form-control"
+        id = "nro_cuenta_cliente"
+        [(ngModel)] = "operacion.nro_cuenta_cliente"
+        name = "nro_cuenta_cliente"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Digite su nombre "
+        #nro_cuenta_cliente = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "nro_cuenta_cliente.invalid && (nro_cuenta_cliente.dirty || nro_cuenta_cliente.touched)">
+          <div *ngIf = "nro_cuenta_cliente.errors.required">
+            Digite el número de cuenta por favor
+          </div>
+          <div *ngIf = "nro_cuenta_cliente.errors.minlength">
+            El número de cuenta tiene que contener como minimo 4 caracteres
+          </div>
+          <div *ngIf = "nro_cuenta_cliente.errors.maxlength">
+            El número de cuenta tiene que tener como maximo 10 caracteres
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Apellido : </label>
+        <input type = "number"
+        class="form-control"
+        id = "asesor"
+        [(ngModel)] = "operacion.asesor"
+        name = "asesor"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Digite su asesor "
+        #asesor = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "asesor.invalid && (asesor.dirty || asesor.touched)">
+          <div *ngIf = "asesor.errors.required">
+            Digite su asesor por favor
+          </div>
+          <div *ngIf = "asesor.errors.minlength">
+            El asesor tiene que contener como minimo 4 caracteres
+          </div>
+          <div *ngIf = "asesor.errors.maxlength">
+            El asesor tiene que tener como maximo 10 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>fecha_solicitud : </label>
+        <input type = "fecha_solicitud"
+        class="form-control"
+        id = "fecha_solicitud"
+        [(ngModel)] = "operacion.fecha_solicitud"
+        name = "fecha_solicitud"
+        pattern ="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+        required
+        placeholder="Digite su la fecha de Solicitud"
+        #fecha_solicitud = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "fecha_solicitud.invalid && (fecha_solicitud.dirty || fecha_solicitud.touched)">
+          <div *ngIf = "fecha_solicitud.errors.required">
+            Digite la fecha de Solicitud por favor
+          </div>
+          <div *ngIf = "fecha_solicitud.errors.pattern">
+            Por favor digite la fecha de Solicitud
+          </div>
+        </div>
+      </div>
+  
+      <button class="btn btn-success" [disabled]= "!operacionForm.form.valid">Guardar</button>
+    </form>
+  </div>
+  
