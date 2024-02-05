@@ -47,8 +47,8 @@ export class CalendarioComponent{
       }
     },
     initialView: 'listWeek',
-    slotMinTime: '08:00:00',
-    slotMaxTime: '17:30:00',
+    slotMinTime: '08:00:00Z',
+    slotMaxTime: '17:30:00Z',
     initialEvents: this.eventos , // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
@@ -98,9 +98,13 @@ export class CalendarioComponent{
   }
 
   actualizarEventosEnCalendario() {
-    this.calendarOptions.update((options) => ({
+    this.calendarOptions.update(options => ({
       ...options,
-      initialEvents: this.eventos,
+      initialEvents: this.eventos.map(evento => ({
+        ...evento,
+        start: new Date(evento.start),
+        end: new Date(evento.end)
+      })),
     }));
   }
 
