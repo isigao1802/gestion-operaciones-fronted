@@ -13,7 +13,6 @@ import multiMonthPlugin from '@fullcalendar/multimonth';
 import { EventoService } from '../evento.service';
 
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,7 +20,7 @@ import { EventoService } from '../evento.service';
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
-export class CalendarioComponent{
+export class CalendarioComponent implements OnInit {
   eventos: any[] = [];
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
@@ -49,46 +48,38 @@ export class CalendarioComponent{
     initialView: 'listWeek',
     slotMinTime: '08:00:00Z',
     slotMaxTime: '17:30:00Z',
-    initialEvents: this.eventos , // alternatively, use the `events` setting to fetch from a feed
+    initialEvents: this.eventos ,
     weekends: true,
-    editable: true,
-    selectable: true,
+    editable: false,
+    selectable: false,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
+    //eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     eventSources: [
       {
-        url: 'http://localhost:8080/eventos', // URL de tu endpoint en Spring Boot
-        // Puedes usar GET u otro método según tu configuración en Spring Boot
-        // Otras opciones para esta fuente, si es necesario
+        url: 'http://localhost:8080/eventos', // URL del endpoint en Spring Boot
+        
       }
     ],
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
-   
   });
   
   currentEvents = signal<EventApi[]>([]);
-
+  
   constructor(private changeDetector: ChangeDetectorRef, private eventoService: EventoService) {
   }
 
   
   ngOnInit() {
     this.obtenerEventos();
+    
   }
 
   obtenerEventos() {
     this.eventoService.obtenerEventos().subscribe(
       (data) => {
         this.eventos = data;
-
-        // Actualizar los eventos en las opciones del calendario después de obtenerlos
         this.actualizarEventosEnCalendario();
       },
       (error) => {
@@ -97,17 +88,52 @@ export class CalendarioComponent{
     );
   }
 
+
+  
   actualizarEventosEnCalendario() {
     this.calendarOptions.update(options => ({
       ...options,
-      initialEvents: this.eventos.map(evento => ({
-        ...evento,
-        start: new Date(evento.start),
-        end: new Date(evento.end)
-      })),
+      initialEvents: this.eventos.map(evento => {
+        if (evento.startDay && evento.endDay) {
+          const formattedStart = this.formatToISOWithOffset(evento.startStr);
+          const formattedEnd = this.formatToISOWithOffset(evento.endDay);
+          return {
+            ...evento,
+            startStr: formattedStart,
+            end: formattedEnd,
+            display: 'auto' 
+          };
+        } else {
+          return null; 
+        }
+      }).filter(evento => evento !== null) 
     }));
   }
+  
 
+  formatToISOWithOffset(date: Date | string): string {
+    // Verificar si date es una cadena y convertirla a Date si es necesario
+    const dateObject = typeof date === 'string' ? new Date(date) : date;
+    
+    // Verificar si dateObject es un objeto Date válido
+    if (dateObject instanceof Date && !isNaN(dateObject.getTime())) {
+      // Obtener los componentes de la fecha
+      const year = dateObject.getFullYear();
+      const month = ('0' + (dateObject.getMonth() + 1)).slice(-2); // Sumar 1 al mes y agregar cero al principio si es necesario
+      const day = ('0' + dateObject.getDate()).slice(-2); // Agregar cero al principio si es necesario
+      const hours = ('0' + dateObject.getHours()).slice(-2); // Obtener las horas y agregar cero al principio si es necesario
+      const minutes = ('0' + dateObject.getMinutes()).slice(-2); // Obtener los minutos y agregar cero al principio si es necesario
+      const seconds = ('0' + dateObject.getSeconds()).slice(-2); // Obtener los segundos y agregar cero al principio si es necesario
+      const offset = '-01:00'; // Offset de tiempo deseado
+  
+      // Construir la cadena de fecha en el formato deseado
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${offset}`;
+    } else {
+      console.error('date no es un objeto Date válido:', date);
+      return ''; // Manejar el caso en el que date no es un objeto Date válido
+    }
+  }
+  
 
   handleCalendarToggle() {
     this.calendarVisible.update((bool) => !bool);
@@ -138,7 +164,7 @@ export class CalendarioComponent{
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    if (confirm(`Estas seguro que deseas eliminar el evento '${clickInfo.event.title}'`)) {
       clickInfo.event.remove();
     }
   }
@@ -147,4 +173,5 @@ export class CalendarioComponent{
     this.currentEvents.set(events);
     this.changeDetector.detectChanges(); // workaround for pressionChangedAfterItHasBeenCheckedError
   }
+  
 }
