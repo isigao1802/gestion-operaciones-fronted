@@ -1,0 +1,83 @@
+<div class="col-md-6 offset-md-3">
+    <h2 class="text-center">Registro de Reuniones</h2>
+    <form (ngSubmit)= "onSubmit()" #reunionForm = "ngForm">
+      <div class="form-group">
+        <label>Nombre : </label>
+        <input type = "text"
+        class="form-control"
+        id = "nro_cuenta_grupo"
+        [(ngModel)] = "reunion.nro_cuenta_grupo"
+        name = "nro_cuenta_grupo"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Digite su nombre "
+        #nro_cuenta_grupo = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "nro_cuenta_grupo.invalid && (nro_cuenta_grupo.dirty || nro_cuenta_grupo.touched)">
+          <div *ngIf = "nro_cuenta_grupo.errors.required">
+            Digite el número de cuenta por favor
+          </div>
+          <div *ngIf = "nro_cuenta_grupo.errors.minlength">
+            El número de cuenta tiene que contener como minimo 4 caracteres
+          </div>
+          <div *ngIf = "nro_cuenta_grupo.errors.maxlength">
+            El número de cuenta tiene que tener como maximo 10 caracteres
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Multa : </label>
+        <input type = "number"
+        class="form-control"
+        id = "id_multa"
+        [(ngModel)] = "reunion.id_multa"
+        name = "id_multa"
+        required
+        minlength="4"
+        maxlength="10"
+        placeholder="Digite su id_multa "
+        #id_multa = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "id_multa.invalid && (id_multa.dirty || id_multa.touched)">
+          <div *ngIf = "id_multa.errors.required">
+            Digite su id_multa por favor
+          </div>
+          <div *ngIf = "id_multa.errors.minlength">
+            El id_multa tiene que contener como minimo 4 caracteres
+          </div>
+          <div *ngIf = "id_multa.errors.maxlength">
+            El id_multa tiene que tener como maximo 10 caracteres
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="fecha_reunion" class="col-form-label col-sm-2">Fecha y Hora</label>
+        <div class="col-sm-5 d-flex align-items-center">
+            <input matInput [matDatepicker]="picker" class="form-control" id="fecha_reunion" [(ngModel)]="reunion.fecha_reunion" name="fecha_reunion" required placeholder="Seleccione la fecha de Reunión" #fecha_reunion="ngModel" style="display: inline;">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </div>
+
+        
+
+        <div class="alert alert-danger col-sm-3" *ngIf="fecha_reunion.invalid && (fecha_reunion.dirty || fecha_reunion.touched)">
+            <div *ngIf="fecha_reunion.errors.required">
+                Seleccione la fecha de Reunión por favor
+            </div>
+            <div *ngIf="fecha_reunion.errors.pattern">
+                Seleccione la fecha de Reunión por favor
+            </div>
+        </div>
+    </div>
+    
+      
+
+
+      <button class="btn btn-success" [disabled]= "!reunionForm.form.valid">Guardar</button>
+    </form>
+  </div>
+  

@@ -9,6 +9,14 @@ import { RegistrarOperacionComponent } from './registrar-operacion/registrar-ope
 import { FormsModule } from '@angular/forms';
 import { OperacionDetallesComponent } from './operacion-detalles/operacion-detalles.component';
 import { CalendarioComponent } from './calendario/calendario.component';
+import { RegistrarReunionComponent } from './registrar-reunion/registrar-reunion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { from } from 'rxjs';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -16,12 +24,19 @@ import { CalendarioComponent } from './calendario/calendario.component';
     ListaOperacionesComponent,
     RegistrarOperacionComponent,
     OperacionDetallesComponent,
+    RegistrarReunionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule, 
+    MatMomentDateModule, 
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule,
+    MatIconModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

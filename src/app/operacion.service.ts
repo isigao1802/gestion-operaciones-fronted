@@ -24,7 +24,7 @@ export class OperacionService {
     return this.httpClient.post(`${this.baseURL}`,operacion);
   }
 
-  //este metodo sirve para actualizar el operacion
+  //este metodo sirve para actualizar la operacion
   actualizarOperacion(id_operacion:number,operacion:Operacion) : Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${id_operacion}`,operacion);
   }
