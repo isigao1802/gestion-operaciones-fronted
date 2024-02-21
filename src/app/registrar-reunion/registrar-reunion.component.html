@@ -62,7 +62,13 @@
             <mat-datepicker #picker></mat-datepicker>
         </div>
 
-        
+        <div class="col-sm-2">
+          <ngx-material-timepicker [(ngModel)]="reunion.hora_reunion" [format]="24" placeholder="Seleccione la hora" name="hora_reunion">
+              <ngx-material-timepicker-toggle>
+                  <mat-icon matSuffix>schedule</mat-icon>
+              </ngx-material-timepicker-toggle>
+          </ngx-material-timepicker>
+      </div>
 
         <div class="alert alert-danger col-sm-3" *ngIf="fecha_reunion.invalid && (fecha_reunion.dirty || fecha_reunion.touched)">
             <div *ngIf="fecha_reunion.errors.required">
