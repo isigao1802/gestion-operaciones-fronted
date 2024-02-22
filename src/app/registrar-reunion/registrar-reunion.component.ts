@@ -1,10 +1,12 @@
 import swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
-import { FormControl, Validators } from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BsDatepickerDirective, BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-registrar-reunion',
@@ -13,9 +15,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class RegistrarReunionComponent {
 
-
+  datePickerConfig: Partial<BsDatepickerConfig>;
+ 
   reunion : Reunion = new Reunion();
-  constructor(private reunionServicio:ReunionService,private router:Router) { }
+  constructor(private reunionServicio:ReunionService,private router:Router) {
+    this.datePickerConfig = Object.assign({}, { containerClass: 'theme-dark-blue' });
+   }
 
   ngOnInit(): void {
   }

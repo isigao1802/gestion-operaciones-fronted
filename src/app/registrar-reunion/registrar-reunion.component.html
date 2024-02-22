@@ -53,36 +53,20 @@
         </div>
       </div>
 
-
-      <div class="form-group row">
-        <label for="fecha_reunion" class="col-form-label col-sm-2">Fecha y Hora</label>
-        <div class="col-sm-5 d-flex align-items-center">
-            <input matInput [matDatepicker]="picker" class="form-control" id="fecha_reunion" [(ngModel)]="reunion.fecha_reunion" name="fecha_reunion" required placeholder="Seleccione la fecha de Reunión" #fecha_reunion="ngModel" style="display: inline;">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </div>
-
-        <div class="col-sm-2">
-          <ngx-material-timepicker [(ngModel)]="reunion.hora_reunion" [format]="24" placeholder="Seleccione la hora" name="hora_reunion">
-              <ngx-material-timepicker-toggle>
-                  <mat-icon matSuffix>schedule</mat-icon>
-              </ngx-material-timepicker-toggle>
-          </ngx-material-timepicker>
-      </div>
-
-        <div class="alert alert-danger col-sm-3" *ngIf="fecha_reunion.invalid && (fecha_reunion.dirty || fecha_reunion.touched)">
-            <div *ngIf="fecha_reunion.errors.required">
-                Seleccione la fecha de Reunión por favor
-            </div>
-            <div *ngIf="fecha_reunion.errors.pattern">
-                Seleccione la fecha de Reunión por favor
-            </div>
-        </div>
+      <div class="form-group">
+        <label>Fecha de Reunión :</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fecha_reunion"
+          [(ngModel)]="reunion.fecha_reunion"
+          name="fecha_reunion"
+          required
+          placeholder="Seleccione fecha de Reunión"
+          #fecha_reunion="bsDatepicker"
+          bsDatepicker
+        >
     </div>
-    
-      
-
-
       <button class="btn btn-success" [disabled]= "!reunionForm.form.valid">Guardar</button>
     </form>
   </div>
