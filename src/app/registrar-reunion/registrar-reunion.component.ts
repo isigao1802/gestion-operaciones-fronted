@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BsDatepickerDirective, BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
 
+
 @Component({
   selector: 'app-registrar-reunion',
   templateUrl: './registrar-reunion.component.html',
@@ -18,6 +19,7 @@ export class RegistrarReunionComponent {
   datePickerConfig: Partial<BsDatepickerConfig>;
  
   reunion : Reunion = new Reunion();
+  @ViewChild('fecha_reunion', {static: false}) fechaReunionPicker: BsDatepickerDirective;
   constructor(private reunionServicio:ReunionService,private router:Router) {
     this.datePickerConfig = Object.assign({}, { containerClass: 'theme-dark-blue' });
    }
@@ -25,6 +27,12 @@ export class RegistrarReunionComponent {
   ngOnInit(): void {
   }
 
+  showCalendar() {
+    console.log('Mostrar calendario');
+    if (this.fechaReunionPicker) {
+      this.fechaReunionPicker.show();
+    }
+  }
   guardarReunion(){
     this.reunionServicio.registrarReunion(this.reunion).subscribe(dato => {
       console.log(dato);

@@ -1,21 +1,10 @@
+@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
+
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* Cambiar el color de fondo del calendario */
-.bs-datepicker-container {
-    background-color: #fdfdfd; /* Color de fondo deseado */
-  }
-  
-  /* Cambiar el color del texto del calendario */
-  .bs-datepicker-container .bs-datepicker-head .current {
-    color: #f9fbfd; /* Color del texto deseado */
-  }
-  
-  /* Cambiar el color del borde del calendario */
-  .bs-datepicker-container .bs-datepicker-head,
-  .bs-datepicker-container .bs-datepicker-body {
-    border-color: #0764b6; /* Color del borde deseado */
-  }
-  
+ 

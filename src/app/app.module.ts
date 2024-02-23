@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,11 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { MatIconModule } from '@angular/material/icon';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE  } from '@angular/material/core';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { defineLocale } from 'ngx-bootstrap/chronos';
-import { esLocale } from 'ngx-bootstrap/locale';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 
+
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { esLocale } from 'ngx-bootstrap/locale';
     RegistrarReunionComponent,
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -37,9 +42,17 @@ import { esLocale } from 'ngx-bootstrap/locale';
     MatIconModule,
     MatNativeDateModule,
     BsDatepickerModule.forRoot(), 
+    NgbModule, 
+    CalendarModule, 
+    DatePickerModule, 
+    TimePickerModule, 
+    DateRangePickerModule, 
+    DateTimePickerModule,
+  
     
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule,
+  { provide: MAT_DATE_LOCALE, useValue: 'es' },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
