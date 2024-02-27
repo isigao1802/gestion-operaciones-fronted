@@ -3,6 +3,7 @@ import { OperacionService } from '../operacion.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operacion } from '../operacion';
+import { ReunionService } from '../reunion.service';
 
 @Component({
   selector: 'app-operacion-detalles',
@@ -13,7 +14,7 @@ export class OperacionDetallesComponent implements OnInit {
 
   nroCuenta:number;
   operacion:Operacion;
-  constructor(private route:ActivatedRoute,private operacionServicio:OperacionService) { }
+  constructor(private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
 
   ngOnInit(): void {
     this.nroCuenta = this.route.snapshot.params['nroCuenta'];

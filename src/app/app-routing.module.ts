@@ -7,12 +7,14 @@ import { RegistrarReunionComponent } from './registrar-reunion/registrar-reunion
 import { CalendarioComponent } from './calendario/calendario.component';
 
 const routes: Routes = [
-  {path : 'operaciones',component:ListaOperacionesComponent},
-  {path:'',redirectTo:'operaciones',pathMatch:'full'},
-  {path : 'registrar-operacion',component : RegistrarOperacionComponent},
-  {path : 'registrar-reunion',component : RegistrarReunionComponent},
-  {path : 'operacion-detalles/:nroCuenta',component : OperacionDetallesComponent},
-  {path : 'calendario',component : CalendarioComponent}
+  { path: 'operaciones', component: ListaOperacionesComponent },
+  { path: 'operaciones/registrar-reunion/:id_operacion', component: RegistrarReunionComponent },
+  { path: 'registrar-operacion', component: RegistrarOperacionComponent },
+  { path: 'registrar-reunion', component: RegistrarReunionComponent },
+  { path: 'operacion-detalles/:nroCuenta', component: OperacionDetallesComponent },
+  { path: 'calendario', component: CalendarioComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'operaciones', pathMatch: 'full' }, 
 ];
 
 @NgModule({
@@ -20,3 +22,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

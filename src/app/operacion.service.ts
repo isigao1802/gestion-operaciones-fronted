@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Operacion } from './operacion';
+import { ReunionService } from './reunion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,14 @@ export class OperacionService {
   private baseURL = "http://localhost:8080/operaciones";
   private lista_operaciones = "buscarOperaciones";
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private reunionService:ReunionService) { }
 
   //este metodo nos sirve para obtener las operaciones
   obtenerListaDeOperaciones():Observable<Operacion[]>{
     return this.httpClient.get<Operacion[]>(`${this.baseURL}/${this.lista_operaciones}`);
   }
 
+  
   //este metodo nos sirve para registrar una operacion
   registrarOperacion(operacion:Operacion) : Observable<Object>{
     return this.httpClient.post(`${this.baseURL}`,operacion);

@@ -26,6 +26,7 @@ export class ListaOperacionesComponent implements OnInit {
   private obtenerOperaciones(){
     this.operacionServicio.obtenerListaDeOperaciones().subscribe(dato => {
       this.operaciones = dato;
+      console.log(dato);
     });
   }
 

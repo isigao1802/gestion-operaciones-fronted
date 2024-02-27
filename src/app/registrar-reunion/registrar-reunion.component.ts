@@ -1,13 +1,11 @@
 import swal from 'sweetalert2';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { BsDatepickerDirective, BsDatepickerConfig  } from 'ngx-bootstrap/datepicker';
-
+import { BsDatepickerDirective, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Operacion } from '../operacion';
+import { OperacionService } from '../operacion.service';
 
 @Component({
   selector: 'app-registrar-reunion',
@@ -15,16 +13,29 @@ import { BsDatepickerDirective, BsDatepickerConfig  } from 'ngx-bootstrap/datepi
   styleUrls: ['./registrar-reunion.component.css']
 })
 export class RegistrarReunionComponent {
-
   datePickerConfig: Partial<BsDatepickerConfig>;
- 
-  reunion : Reunion = new Reunion();
+  reunion: Reunion = new Reunion();
+  operacion: Operacion = new Operacion();
+  id_operacion:number;
+
   @ViewChild('fecha_reunion', {static: false}) fechaReunionPicker: BsDatepickerDirective;
-  constructor(private reunionServicio:ReunionService,private router:Router) {
+
+  constructor(private reunionServicio: ReunionService, private router: Router,
+    private operacionService: OperacionService, private route:ActivatedRoute ) {
     this.datePickerConfig = Object.assign({}, { containerClass: 'theme-dark-blue' });
-   }
+    this.reunion.fechaDeReunion = new Date(); 
+  }
 
   ngOnInit(): void {
+    this.id_operacion = this.route.snapshot.params['id_operacion'];
+    this.operacionService.obtenerOperacionPorId(this.id_operacion).subscribe(dato =>{
+      console.log(dato);
+      this.operacion = dato;
+      this.reunion.nombre_grupo=this.operacion.nombre_grupo;
+      this.reunion.nro_cuenta_grupo = this.operacion.nro_cuenta_cliente;
+      this.reunion.asesor = this.operacion.asesor;
+      this.reunion.id_operacion=this.operacion.id_operacion;
+    },error => console.log(error));
   }
 
   showCalendar() {
@@ -33,20 +44,23 @@ export class RegistrarReunionComponent {
       this.fechaReunionPicker.show();
     }
   }
-  guardarReunion(){
-    this.reunionServicio.registrarReunion(this.reunion).subscribe(dato => {
-      console.log(dato);
-      this.irALaListaDeReuniones();
-    },error => console.log(error));
+
+  guardarReunion() {
+    this.reunionServicio.registrarReunion(this.reunion).subscribe(
+      dato => {
+        console.log(dato);
+        this.irALaListaDeReuniones();
+      },
+      error => console.log(error)
+    );
   }
 
-  irALaListaDeReuniones(){
+  irALaListaDeReuniones() {
     this.router.navigate(['/reuniones']);
-    swal('Reunión registrada',`La Reunión ${this.reunion.id_reunion} ha sido registrada con exito`,`success`);
+    swal('Reunión registrada', `La Reunión ${this.reunion.id_reunion} ha sido registrada con éxito`, `success`);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.guardarReunion();
   }
-
 }

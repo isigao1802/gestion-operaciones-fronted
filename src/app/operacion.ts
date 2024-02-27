@@ -3,7 +3,7 @@ export class Operacion {
 
     id_operacion:number;
     nro_cuenta_cliente:number
-    asesor:number;
+    asesor:string;
     fecha_solicitud:Date;
     fecha_desembolso:Date;
     monto_desembolso:number;
@@ -13,5 +13,6 @@ export class Operacion {
     interes:number;
     saldo:number;
     fecha_cierre:Date;  
+    nombre_grupo:String;
   }
   

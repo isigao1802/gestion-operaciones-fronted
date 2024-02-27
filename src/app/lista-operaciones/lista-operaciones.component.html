@@ -2,21 +2,23 @@
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
-      <th>Cuenta Cliente</th>
+      <th>Nro Cuenta Grupal</th>
+      <th>Nombre de Grupo</th>
       <th>Asesor</th>
-      <th>Fecha de Solicitud</th>
+      <th>Fecha de Desembolso</th>
       <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor= "let operacion of operaciones">
       <td>{{operacion.nro_cuenta_cliente}}</td>
+      <td>{{operacion.nombre_grupo}}</td>
       <td>{{operacion.asesor}}</td>
-      <td>{{operacion.fecha_solicitud}}</td>
+      <td>{{operacion.fecha_desembolso}}</td>
       <td>
-        <button (click)= "actualizarOperacion(operacion.id_operacion)" class="btn btn-info">Editar</button>
-        <button (click)= "eliminarOperacion(operacion.id_operacion)" class="btn btn-danger" style="margin-left : 10px;">Eliminar</button>
         <button (click)= "verDetallesDelaOperacion(operacion.id_operacion)" class="btn btn-primary" style="margin-left : 10px;">Detalles</button>
+        <button [routerLink]="['./registrar-reunion', operacion.id_operacion]" class="btn btn-success" style="margin-left : 10px;">Agendar Reuniones</button>
+
       </td>
     </tr>
   </tbody>

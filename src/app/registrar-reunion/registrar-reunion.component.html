@@ -1,34 +1,92 @@
 <div class="col-md-6 offset-md-3">
-  <h2 class="text-center">Registro de Reuniones</h2>
-  <form (ngSubmit)="onSubmit()" #reunionForm="ngForm">
-      <div class="form-group">
-          <label>Nombre:</label>
+  <h2 class="text-center">Agendamiento de Reuniones</h2>
+  <form (ngSubmit)="onSubmit()" #operacionForm2="ngForm">
+      <div class="form-group row">
+          <label for="nombre_grupo" class="col-form-label col-sm-2">Nombre de Grupo</label>
+          <div class="col-sm-6">
           <input type="text"
                  class="form-control"
-                 id="nro_cuenta_grupo"
-                 [(ngModel)]="reunion.nro_cuenta_grupo"
-                 name="nro_cuenta_grupo"
+                 id="nombre_grupo"
+                 [(ngModel)]="operacion.nombre_grupo"
+                 name="nombre_grupo"
                  required
                  minlength="4"
-                 maxlength="10"
+                 maxlength="30"
                  placeholder="Digite su nombre"
-                 #nro_cuenta_grupo="ngModel">
-          <div class="alert alert-danger" *ngIf="nro_cuenta_grupo.invalid && (nro_cuenta_grupo.dirty || nro_cuenta_grupo.touched)">
-              <div *ngIf="nro_cuenta_grupo.errors.required">
+                 #nombre_grupo="ngModel">
+          <div class="alert alert-danger" *ngIf="nombre_grupo.invalid && (nombre_grupo.dirty || nombre_grupo.touched)">
+              <div *ngIf="nombre_grupo.errors.required">
                   Digite el número de cuenta por favor
               </div>
-              <div *ngIf="nro_cuenta_grupo.errors.minlength">
+              <div *ngIf="nombre_grupo.errors.minlength">
                   El número de cuenta tiene que contener como mínimo 4 caracteres
               </div>
-              <div *ngIf="nro_cuenta_grupo.errors.maxlength">
+              <div *ngIf="nombre_grupo.errors.maxlength">
                   El número de cuenta tiene que tener como máximo 10 caracteres
-              </div>
+              </div> 
+            </div>
           </div>
       </div>
 
-      <div class="form-group">
-          <label>Multa:</label>
-          <input type="number"
+      <div class="form-group row">
+        <label for="nro_cuenta_grupo" class="col-form-label col-sm-2">Número de Cuenta Grupal</label>
+        <div class="col-sm-6">
+        <input type="text"
+               class="form-control"
+               id="nro_cuenta_grupo"
+               [(ngModel)]="operacion.nro_cuenta_cliente"
+               name="nro_cuenta_grupo"
+               required
+               minlength="4"
+               maxlength="30"
+               placeholder="Digite su nombre"
+               #nro_cuenta_grupo="ngModel">
+        <div class="alert alert-danger" *ngIf="nro_cuenta_grupo.invalid && (nro_cuenta_grupo.dirty || nro_cuenta_grupo.touched)">
+            <div *ngIf="nro_cuenta_grupo.errors.required">
+                Digite el número de cuenta por favor
+            </div>
+            <div *ngIf="nombre_grupo.errors.minlength">
+                El número de cuenta tiene que contener como mínimo 4 caracteres
+            </div>
+            <div *ngIf="nombre_grupo.errors.maxlength">
+                El número de cuenta tiene que tener como máximo 10 caracteres
+            </div> 
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="asesor" class="col-form-label col-sm-2">Asesor</label>
+        <div class="col-sm-6">
+        <input type="text"
+               class="form-control"
+               id="asesor"
+               [(ngModel)]="operacion.asesor"
+               name="asesor"
+               required
+               minlength="4"
+               maxlength="30"
+               placeholder="Digite su nombre"
+               #asesor="ngModel">
+        <div class="alert alert-danger" *ngIf="asesor.invalid && (asesor.dirty || asesor.touched)">
+            <div *ngIf="asesor.errors.required">
+                Digite el número de cuenta por favor
+            </div>
+            <div *ngIf="asesor.errors.minlength">
+                El número de cuenta tiene que contener como mínimo 4 caracteres
+            </div>
+            <div *ngIf="asesor.errors.maxlength">
+                El número de cuenta tiene que tener como máximo 10 caracteres
+            </div> 
+          </div>
+        </div>
+    </div>
+
+<!-- 
+      <div class="form-group row">
+        <label for="fechaDeReunion" class="col-form-label col-sm-2">Multa</label>
+        <div class="col-sm-6">
+        <input type="number"
                  class="form-control"
                  id="id_multa"
                  [(ngModel)]="reunion.id_multa"
@@ -36,8 +94,10 @@
                  required
                  minlength="4"
                  maxlength="10"
-                 placeholder="Digite su id_multa"
-                 #id_multa="ngModel">
+                 placeholder="Ingrese la Multa"
+                 #id_multa="ngModel"
+                 min="0"
+                 style="display: inline; width: 300px">
           <div class="alert alert-danger" *ngIf="id_multa.invalid && (id_multa.dirty || id_multa.touched)">
               <div *ngIf="id_multa.errors.required">
                   Digite su id_multa por favor
@@ -48,27 +108,30 @@
               <div *ngIf="id_multa.errors.maxlength">
                   El id_multa tiene que tener como máximo 10 caracteres
               </div>
-          </div>
-      </div>
+            </div>    
+        </div>
+    </div>
+ -->
 
-      <div class="form-group row">
-          <label for="fechaDeReunion" class="col-form-label col-sm-2">Fecha de Reunión</label>
-          <div class="col-sm-6">
-              <input 
-                     type="text"
-                     matInput [matDatepicker]="picker"
-                     class="form-control"
-                     id="fechaDeReunion"
-                     [(ngModel)]="reunion.fechaDeReunion"
-                     name="fechaDeReunion"
-                     required
-                     placeholder="Seleccione fecha de Reunión"
-                     style="display: inline; width: 300px">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-          </div>
-      </div>
-
+    <div class="form-group row">
+        <label for="fechaDeReunion" class="col-form-label col-sm-2">Fecha de Primera Reunión</label>
+        <div class="col-sm-6">
+            <input 
+                type="text"
+                matInput [matDatepicker]="picker"
+                class="form-control"
+                id="fechaDeReunion"
+                [(ngModel)]="reunion.fechaDeReunion"
+                name="fechaDeReunion"
+                required
+                placeholder="Seleccione fecha de Reunión"
+                style="display: inline; width: 300px"
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+        </div>
+    </div>
+        
       <div class="form-group row">
         <label for="hora_reunion" class="col-form-label col-sm-2">Hora de Reunión</label>
         <div class="col-sm-6" style="display: flex; align-items: center;">
@@ -86,8 +149,52 @@
         </div>
     </div>
     
-    
+    <div class="form-group">
+        <label>Frecuencia (Días)</label>
+        <input type="number"
+               class="form-control"
+               id="frecuencia"
+               [(ngModel)]="reunion.frecuencia"
+               name="frecuencia"
+               required
+               minlength="1"
+               maxlength="10"
+               placeholder="Ingrese la Cantidad de Días"
+               #frecuencia="ngModel"
+               min="1"
+               style="width: 300px">
+        <div class="alert alert-danger" *ngIf="frecuencia.invalid && (frecuencia.dirty || frecuencia.touched)">
+            <div *ngIf="frecuencia.errors.required">
+                Digite la frecuencia por favor
+            </div>
+            <div *ngIf="frecuencia.errors.minlength">
+                La Frecuencia tiene que contener como mínimo 1 caracteres
+            </div>
+            <div *ngIf="frecuencia.errors.maxlength">
+                La Frecuencia tiene que tener como máximo 10 caracteres
+            </div>
+        </div>
+    </div>
 
-      <button class="btn btn-success" [disabled]="!reunionForm.form.valid">Guardar</button>
+    <div class="form-group row">
+        <label for="fechaDeCierre" class="col-form-label col-sm-2">Fecha de Cierre</label>
+        <div class="col-sm-3 col-md-3">
+            <input 
+                type="text"
+                matInput [matDatepicker]="picker"
+                class="form-control"
+                id="fechaDeCierre"
+                [(ngModel)]="reunion.fechaDeCierre"
+                name="fechaDeCierre"
+                required
+                placeholder="Seleccione fecha de Cierre"
+                style="display: inline; width: 300px"
+                >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+        </div>
+    </div>
+
+      <button class="btn btn-success" [disabled]="!operacionForm2.form.valid">Guardar</button>
   </form>
 </div>
