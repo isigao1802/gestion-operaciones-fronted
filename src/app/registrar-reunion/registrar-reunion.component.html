@@ -151,7 +151,7 @@
     
     <div class="form-group">
         <label>Frecuencia (Días)</label>
-        <input type="number"
+        <select type="number"
                class="form-control"
                id="frecuencia"
                [(ngModel)]="reunion.frecuencia"
@@ -163,6 +163,10 @@
                #frecuencia="ngModel"
                min="1"
                style="width: 300px">
+               <option value="7">Semanal - Cada 7 días</option>
+               <option value="14">Quincenal - Cada 14 días</option>
+               <option value="28">Mensual - Cada 28 días</option>
+            </select>
         <div class="alert alert-danger" *ngIf="frecuencia.invalid && (frecuencia.dirty || frecuencia.touched)">
             <div *ngIf="frecuencia.errors.required">
                 Digite la frecuencia por favor

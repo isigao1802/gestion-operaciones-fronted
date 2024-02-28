@@ -18,6 +18,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
+import { CommonModule } from '@angular/common';
 
 
 registerLocaleData(localeEs, 'es');
@@ -29,6 +31,7 @@ registerLocaleData(localeEs, 'es');
     RegistrarOperacionComponent,
     OperacionDetallesComponent,
     RegistrarReunionComponent,
+    ListaReunionesComponent
   ],
   imports: [
     

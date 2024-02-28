@@ -1,0 +1,23 @@
+<h2>Lista de Reuniones</h2>
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Nombre de Grupo</th>
+      <th>Nro de Operación</th>
+      <th>Asesor</th>
+      <th>Fecha de Reunión</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor= "let reunion of reuniones">
+      <td>{{reunion.nombreGrupo}}</td>
+      <td>{{reunion.idOperacion}}</td>
+      <td>{{reunion.asesor}}</td>
+      <td>{{reunion.fechaDeReunion}}</td>
+      <td>
+        <button (click)= "verDetallesDelaOperacion(reunion.idOperacion)" class="btn btn-primary" style="margin-left : 10px;"> Ver Detalles</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

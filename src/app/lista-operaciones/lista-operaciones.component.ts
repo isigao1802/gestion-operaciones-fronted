@@ -19,6 +19,10 @@ export class ListaOperacionesComponent implements OnInit {
     this.obtenerOperaciones();
   }
 
+  redirectToReuniones() {
+    this.router.navigate(['/reuniones']);
+  }
+
   actualizarOperacion(id:number){
     this.router.navigate(['actualizar-operacion',id]);
   }

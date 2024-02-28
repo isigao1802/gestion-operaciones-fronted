@@ -1,7 +1,7 @@
 export class Reunion {
 
     id_reunion:number;
-    nombre_grupo:String;
+    nombreGrupo:String;
     fechaDeReunion:Date;
     fechaDeCierre:Date;
     id_multa:number;
@@ -12,5 +12,5 @@ export class Reunion {
     hora_reunion:string;
     frecuencia:number;
     asesor:string;
-    id_operacion:number;
+    idOperacion:number;
 }
