@@ -57,7 +57,7 @@ export class RegistrarReunionComponent {
 
   irALaListaDeReuniones() {
     this.router.navigate(['/reuniones']);
-    swal('Reunión registrada', `La Reunión ${this.reunion.id_reunion} ha sido registrada con éxito`, `success`);
+    swal('Reunión registrada', `La Reunión ${this.reunion.idReunion} ha sido registrada con éxito`, `success`);
   }
 
   onSubmit() {

@@ -1,6 +1,6 @@
 export class Reunion {
 
-    id_reunion:number;
+    idReunion:number;
     nombreGrupo:String;
     fechaDeReunion:Date;
     fechaDeCierre:Date;

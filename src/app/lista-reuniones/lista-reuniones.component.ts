@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lista-reuniones',
@@ -11,12 +12,16 @@ import { Reunion } from '../reunion';
 })
 export class ListaReunionesComponent implements OnInit{
 
+  idOperacion:number;
   reuniones:Reunion[];
 
-  constructor(private reunionServicio:ReunionService,private router:Router) { }
+  constructor(private route:ActivatedRoute,private reunionServicio:ReunionService,private router:Router) { }
 
   ngOnInit(): void {
-    this.obtenerReuniones();
+    this.idOperacion = this.route.snapshot.params['idOperacion'];
+    this.obtenerReunionesPorIdOperacion(this.idOperacion)
+    
+   
   }
 
   actualizarReunion(id:number){
@@ -26,9 +31,17 @@ export class ListaReunionesComponent implements OnInit{
   private obtenerReuniones(){
     this.reunionServicio.obtenerListaDeReuniones().subscribe(dato => {
       this.reuniones = dato;
-      console.log(dato);
+      console.log("Listado Completo",dato);
     });
   }
+
+   obtenerReunionesPorIdOperacion(idOperacion:number){
+    this.reunionServicio.obtenerReunionPorIdOperacion(idOperacion).subscribe(dato => {
+      this.reuniones = dato;
+      console.log( "Por Id Operacion:",dato);
+    });
+  }
+
 
     eliminarReunion(id:number){
       swal({
@@ -61,5 +74,9 @@ export class ListaReunionesComponent implements OnInit{
 
   verDetallesDelaOperacion(nroCuenta:number){
     this.router.navigate(['operacion-detalles',nroCuenta]);
+  }
+
+  verDetallesDelaReunion(id_reunion:number){
+    this.router.navigate(['reunion-detalles',id_reunion]);
   }
 }

@@ -11,6 +11,8 @@ export class ReunionService {
   //Esta URL obtiene el listado de todas las reuniones en el backend
   private baseURL = "http://localhost:8080/reuniones";
   private lista_reuniones = "buscarReuniones";
+  private porIdOperacion = "obtenerPorIdOperacion";
+
 
   constructor(private httpClient : HttpClient) { }
 
@@ -30,9 +32,14 @@ export class ReunionService {
   }
 
   //este metodo sirve para obtener o buscar un reunion
-  obtenerReunionPorId(id_reunion:number):Observable<Reunion>{
-    return this.httpClient.get<Reunion>(`${this.baseURL}/${id_reunion}`);
+  obtenerReunionPorId(idReunion:number):Observable<Reunion>{
+    return this.httpClient.get<Reunion>(`${this.baseURL}/${idReunion}`);
   }
+
+    //este metodo sirve para obtener o buscar un reunion
+    obtenerReunionPorIdOperacion(idOperacion:number):Observable<Reunion[]>{
+      return this.httpClient.get<Reunion[]>(`${this.baseURL}/${this.porIdOperacion}/${idOperacion}`);
+    }
 
   eliminarReunion(id_reunion:number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id_reunion}`);

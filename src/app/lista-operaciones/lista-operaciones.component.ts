@@ -3,6 +3,8 @@ import { OperacionService } from '../operacion.service';
 import { Operacion } from '../operacion';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReunionService } from '../reunion.service';
+import { Reunion } from '../reunion';
 
 @Component({
   selector: 'app-lista-operaciones',
@@ -12,8 +14,9 @@ import { Router } from '@angular/router';
 export class ListaOperacionesComponent implements OnInit {
 
   operaciones:Operacion[];
+  reuniones:Reunion[];
 
-  constructor(private operacionServicio:OperacionService,private router:Router) { }
+  constructor(private operacionServicio:OperacionService,private router:Router, private reunionServicio:ReunionService) { }
 
   ngOnInit(): void {
     this.obtenerOperaciones();
@@ -22,6 +25,16 @@ export class ListaOperacionesComponent implements OnInit {
   redirectToReuniones() {
     this.router.navigate(['/reuniones']);
   }
+
+
+    obtenerReunionesPorIdOperacion(idOperacion:number){
+    this.reunionServicio.obtenerReunionPorIdOperacion(idOperacion).subscribe(dato => {
+      this.reuniones = dato;
+      console.log( "Por Id Operacion:",dato);
+      this.router.navigate(['/operaciones/reuniones', idOperacion]);
+    });
+  }
+
 
   actualizarOperacion(id:number){
     this.router.navigate(['actualizar-operacion',id]);
