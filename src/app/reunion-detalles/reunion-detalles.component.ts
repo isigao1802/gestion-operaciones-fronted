@@ -26,9 +26,7 @@ export class ReunionDetallesComponent implements OnInit{
     this.reunion = new Reunion();
     this.reunionService.obtenerReunionPorId(this.idReunion).subscribe(dato => {
       this.reunion = dato;
-      console.log(dato);
-      console.log(this.reunion);
-      swal(`Detalles de la Reunión ${this.reunion.idReunion}`);
+      swal(`Detalles de la Reunión N° <strong>${this.reunion.idReunion}</strong>`);
     });
   }
 

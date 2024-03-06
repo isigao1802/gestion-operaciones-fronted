@@ -79,4 +79,9 @@ export class ListaReunionesComponent implements OnInit{
   verDetallesDelaReunion(id_reunion:number){
     this.router.navigate(['reunion-detalles',id_reunion]);
   }
+
+  modificarReunion(idReunion:number){
+    this.router.navigate(['modificar-reunion',idReunion]);
+  }
+
 }

@@ -20,6 +20,7 @@ import { registerLocaleData } from '@angular/common';
 import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
 import { CommonModule } from '@angular/common';
+import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
 
 
 registerLocaleData(localeEs, 'es');
@@ -31,7 +32,8 @@ registerLocaleData(localeEs, 'es');
     RegistrarOperacionComponent,
     OperacionDetallesComponent,
     RegistrarReunionComponent,
-    ListaReunionesComponent
+    ListaReunionesComponent,
+    ModificarReunionComponent
   ],
   imports: [
     

@@ -1,0 +1,59 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Modificar Reunión</h3>
+    <form (ngSubmit)= "onSubmit()" #reunionForm = "ngForm">
+      <div class="form-group">
+        <label>Id Reunión : </label>
+        <input type = "text"
+        class="form-control"
+        id = "idReunion"
+        [(ngModel)] = "reunion.idReunion"
+        name = "idReunion"
+        required
+        minlength="1"
+        maxlength="10"
+        placeholder="Digite su nombre "
+        #idReunion = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "idReunion.invalid && (idReunion.dirty || idReunion.touched)">
+          <div *ngIf = "idReunion.errors.required">
+            Digite el id de transferencia por favor
+          </div>
+          <div *ngIf = "idReunion.errors.minlength">
+            El nombre tiene que contener como minimo 1 caracter.
+          </div>
+          <div *ngIf = "idReunion.errors.maxlength">
+            El nombre tiene que tener como maximo 10 caracteres.
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Asesor : </label>
+        <input type = "text"
+        class="form-control"
+        id = "asesor"
+        [(ngModel)] = "reunion.asesor"
+        name = "asesor"
+        required
+        minlength="1"
+        maxlength="40"
+        placeholder="Digite el nombre del asesor"
+        #asesor = "ngModel"
+        >
+        <div class="alert alert-danger" *ngIf= "asesor.invalid && (asesor.dirty || asesor.touched)">
+          <div *ngIf = "asesor.errors.required">
+            Digite el nombre de Crédito por favor
+          </div>
+          <div *ngIf = "asesor.errors.minlength">
+            El nombre de Crédito debe contener como minimo 4 caracteres
+          </div>
+          <div *ngIf = "asesor.errors.maxlength">
+            El nombre de Crédito debe tener como maximo 10 caracteres
+          </div>
+        </div>
+      </div>
+  
+      <button class="btn btn-success" [disabled]= "!reunionForm.form.valid">Guardar</button>
+    </form>
+  </div>
+  

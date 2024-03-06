@@ -1,28 +1,42 @@
-<h3>Detalles de la Reunión</h3>
-<div>
-  <div>
-    <label><b>ID de Reunión : </b> {{ reunion.idReunion }}</label>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de la Reunión</title>
+  <link rel="stylesheet" href="reunion-detalles.component.css"> <!-- Vincula el archivo CSS externo -->
+</head>
+<body>
+  <div class="container">
+    <h3>Detalles de la Reunión N° {{ reunion.idReunion }}</h3>
+    <div class="details-item">
+      <label class="details-label">N° Operación:</label>
+      <span class="details-value">{{ reunion.idOperacion }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Asesor:</label>
+      <span class="details-value">{{ reunion.asesor }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Monto desembolsado:</label>
+      <span class="details-value">{{ reunion.monto_desembolso }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Nombre del Grupo:</label>
+      <span class="details-value">{{ reunion.nombreGrupo }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Número de cuenta del Grupo:</label>
+      <span class="details-value">{{ reunion.nro_cuenta_grupo }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Reunión:</label>
+      <span class="details-value">{{ reunion.fechaDeReunion }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Cierre de la Operación:</label>
+      <span class="details-value">{{ reunion.fechaDeCierre }}</span>
+    </div>
   </div>
-  <div>
-    <label><b>Asesor : </b> {{ reunion.asesor }}</label>
-  </div>
-  <div>
-    <label><b>Id Operación </b> {{ reunion.idOperacion }}</label>
-  </div>
-  <div>
-    <label><b>Monto desembolsado:  </b> {{ reunion.monto_desembolso }}</label>
-  </div>
-  <div>
-    <label><b>Nombre del Grupo:  </b> {{ reunion.nombreGrupo }}</label>
-  </div>
-  <div>
-    <label><b>Número de cuenta del Grupo:  </b> {{ reunion.nro_cuenta_grupo }}</label>
-  </div>
-  <div>
-    <label><b>Fecha de Reunión:  </b> {{ reunion.fechaDeReunion }}</label>
-  </div>
-  <div>
-    <label><b>Fecha de Cierre de la Operación:  </b> {{ reunion.fechaDeCierre }}</label>
-  </div>
-</div>
-
+</body>
+</html>

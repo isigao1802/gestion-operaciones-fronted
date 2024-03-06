@@ -27,8 +27,8 @@ export class ReunionService {
   }
 
   //este metodo sirve para actualizar el reunion
-  actualizarReunion(id_reunion:number,reunion:Reunion) : Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}/${id_reunion}`,reunion);
+  actualizarReunion(idReunion:number,reunion:Reunion) : Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}/${idReunion}`,reunion);
   }
 
   //este metodo sirve para obtener o buscar un reunion

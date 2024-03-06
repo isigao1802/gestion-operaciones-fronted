@@ -7,9 +7,11 @@ import { RegistrarReunionComponent } from './registrar-reunion/registrar-reunion
 import { CalendarioComponent } from './calendario/calendario.component';
 import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
 import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
+import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
 
 const routes: Routes = [
   { path: 'operaciones', component: ListaOperacionesComponent },
+  {path : 'modificar-reunion/:idReunion',component : ModificarReunionComponent},
   { path: 'reuniones', component: ListaReunionesComponent },
   { path: 'operaciones/reuniones/:idOperacion', component: ListaReunionesComponent },
   { path: 'operaciones/registrar-reunion/:id_operacion', component: RegistrarReunionComponent },
