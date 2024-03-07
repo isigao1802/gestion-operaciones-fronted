@@ -2,6 +2,7 @@
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
+      <th>N° Operación</th>
       <th>Nro Cuenta Grupal</th>
       <th>Nombre de Grupo</th>
       <th>Asesor</th>
@@ -11,10 +12,11 @@
   </thead>
   <tbody>
     <tr *ngFor= "let operacion of operaciones">
+      <td style="text-align: center;">{{operacion.id_operacion}}</td>
       <td>{{operacion.nro_cuenta_cliente}}</td>
       <td>{{operacion.nombre_grupo}}</td>
       <td>{{operacion.asesor}}</td>
-      <td>{{operacion.fecha_desembolso}}</td>
+      <td>{{operacion.fecha_desembolso | date:'dd/MM/yyyy'}}</td>
       <td>
         <div class="d-inline-block">
           <button (click)="verDetallesDelaOperacion(operacion.id_operacion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>

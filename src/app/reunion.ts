@@ -7,10 +7,11 @@ export class Reunion {
     id_multa:number;
     monto_desembolso:number;
     interes_interno :number;
-    nro_cuenta_grupo:number;
+    nroCuentaCliente:number;
     prestamo_interno:number;
-    hora_reunion:string;
+    horaReunion:string;
     frecuencia:number;
     asesor:string;
     idOperacion:number;
+    nroCuota:number;
 }

@@ -1,20 +1,20 @@
-<h2>Lista de Reuniones</h2>
+<h2>Lista de Reuniones de la Operación N° {{ idOperacion }}</h2>
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
+      <th style="text-align: center;">N° de Reunión</th>
       <th>Nombre de Grupo</th>
-      <th>Nro de Operación</th>
       <th>Asesor</th>
       <th>Fecha de Reunión</th>
-      <th>Acciones</th>
+      <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor= "let reunion of reuniones">
+      <td style="text-align: center;">{{reunion.nroCuota}}</td>
       <td>{{reunion.nombreGrupo}}</td>
-      <td>{{reunion.idOperacion}}</td>
       <td>{{reunion.asesor}}</td>
-      <td>{{reunion.fechaDeReunion}}</td>
+      <td>{{reunion.fechaDeReunion | date:'dd/MM/yyyy'}}</td>
       <td>
         <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
         <button (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar Reunión</button>
@@ -22,3 +22,4 @@
     </tr>
   </tbody>
 </table>
+

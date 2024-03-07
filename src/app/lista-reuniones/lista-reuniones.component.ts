@@ -11,8 +11,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./lista-reuniones.component.css']
 })
 export class ListaReunionesComponent implements OnInit{
-
+  nombreGrupo:String;
   idOperacion:number;
+  idReunion:number;
   reuniones:Reunion[];
 
   constructor(private route:ActivatedRoute,private reunionServicio:ReunionService,private router:Router) { }

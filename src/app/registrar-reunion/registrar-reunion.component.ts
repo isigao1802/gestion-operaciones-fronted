@@ -32,7 +32,7 @@ export class RegistrarReunionComponent {
       console.log(dato);
       this.operacion = dato;
       this.reunion.nombreGrupo=this.operacion.nombre_grupo;
-      this.reunion.nro_cuenta_grupo = this.operacion.nro_cuenta_cliente;
+      this.reunion.nroCuentaCliente = this.operacion.nro_cuenta_cliente;
       this.reunion.asesor = this.operacion.asesor;
       this.reunion.idOperacion=this.operacion.id_operacion;
     },error => console.log(error));

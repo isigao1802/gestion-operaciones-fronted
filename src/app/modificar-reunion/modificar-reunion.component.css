@@ -1,0 +1,19 @@
+.form-group {
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+}
+
+.form-group label {
+    margin-right: 10px; /* Ajusta el espacio entre el label y el input */
+    min-width: 100px; /* Ajusta el ancho mínimo del label */
+}
+
+.input-wrapper {
+    flex: 1; /* Hace que el div contenedor del input ocupe todo el espacio disponible */
+    display: flex; /* Para que los elementos internos se ajusten correctamente */
+    align-items: center; /* Alinea verticalmente los elementos dentro del contenedor */
+}
+
+.input-wrapper input {
+    flex: 1; /* Hace que el input ocupe todo el espacio disponible */
+}

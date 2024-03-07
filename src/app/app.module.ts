@@ -21,6 +21,7 @@ import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModu
 import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
 import { CommonModule } from '@angular/common';
 import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
+import { DatePipe } from '@angular/common';
 
 
 registerLocaleData(localeEs, 'es');
@@ -34,6 +35,7 @@ registerLocaleData(localeEs, 'es');
     RegistrarReunionComponent,
     ListaReunionesComponent,
     ModificarReunionComponent
+    
   ],
   imports: [
     
@@ -53,10 +55,11 @@ registerLocaleData(localeEs, 'es');
     TimePickerModule, 
     DateRangePickerModule, 
     DateTimePickerModule,
-  
+    CommonModule,
     
   ],
   providers: [MatDatepickerModule,
+    DatePipe,
   { provide: MAT_DATE_LOCALE, useValue: 'es' },],
   bootstrap: [AppComponent]
 })

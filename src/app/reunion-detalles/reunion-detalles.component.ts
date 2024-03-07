@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Operacion } from '../operacion';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
-
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -13,6 +13,7 @@ import { Reunion } from '../reunion';
   templateUrl: './reunion-detalles.component.html',
   styleUrl: './reunion-detalles.component.css'
 })
+
 export class ReunionDetallesComponent implements OnInit{
 
   
