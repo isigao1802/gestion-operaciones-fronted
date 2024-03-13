@@ -1,15 +1,46 @@
-<h3>Detalles de la Operación</h3>
-<div>
-  <div>
-    <label><b>ID : </b> {{ operacion.id_operacion }}</label>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles de la Reunión</title>
+  <link rel="stylesheet" href="operacion-detalles.component.css"> <!-- Vincula el archivo CSS externo -->
+</head>
+<body>
+  <div class="container">
+    <h3>Detalles de la Operación N° {{ operacion.id_operacion }}</h3>
+    <div class="details-item">
+      <label class="details-label">Nro de Cuenta Grupal :</label>
+      <span class="details-value">{{ operacion.nro_cuenta_cliente.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Asesor:</label>
+      <span class="details-value">{{ operacion.asesor }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Monto desembolsado:</label>
+      <span class="details-value">{{ operacion.monto_desembolso.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Solicitud:</label>
+      <span class="details-value">{{ operacion.fecha_solicitud_formateada }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Asesor:</label>
+      <span class="details-value">{{ operacion.asesor }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Monto de Cuota:</label>
+      <span class="details-value">{{ operacion.monto_cuota.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Capital:</label>
+      <span class="details-value">{{ operacion.capital.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Interés:</label>
+      <span class="details-value">{{ operacion.interes.toLocaleString('es-ES') }}</span>
+    </div>
   </div>
-  <div>
-    <label><b>Nro de Cuenta : </b> {{ operacion.nro_cuenta_cliente }}</label>
-  </div>
-  <div>
-    <label><b>Asesor : </b> {{ operacion.asesor }}</label>
-  </div>
-  <div>
-    <label><b>Fecha de solicitud </b> {{ operacion.fecha_solicitud }}</label>
-  </div>
-</div>
+</body>
+</html>

@@ -151,25 +151,15 @@
         <input type = "text"
         class="form-control"
         id = "fechaCierre"
-        [(ngModel)] = "reunion.fechaDeCierre"
+        [(ngModel)] = "reunion.fechaCierreFormateada"
         name = "fechaCierre"
         required
         minlength="1"
         maxlength="40"
         #fechaCierre = "ngModel"
         readonly
+        appFormatoFecha
         >
-        <div class="alert alert-danger" *ngIf= "fechaCierre.invalid && (fechaCierre.dirty || fechaCierre.touched)">
-          <div *ngIf = "fechaCierre.errors.required">
-            Digite la fecha de cierre por favor
-          </div>
-          <div *ngIf = "fechaCierre.errors.minlength">
-            La fecha de cierre debe contener como minimo 4 caracteres
-          </div>
-          <div *ngIf = "fechaCierre.errors.maxlength">
-            La fecha de cierre debe tener como maximo 10 caracteres
-          </div>
-        </div>
        </div>
       </div>
 
@@ -186,6 +176,7 @@
                 required
                 placeholder="Seleccione fecha de Reunión"
                 style="display: inline; width: 300px"
+                appFormatoFecha
                 >
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>

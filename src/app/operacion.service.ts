@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Operacion } from './operacion';
 import { ReunionService } from './reunion.service';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,15 @@ export class OperacionService {
 
   //este metodo sirve para obtener o buscar un operacion
   obtenerOperacionPorId(id_operacion:number):Observable<Operacion>{
-    return this.httpClient.get<Operacion>(`${this.baseURL}/${id_operacion}`);
+    return this.httpClient.get<Operacion>(`${this.baseURL}/${id_operacion}`).pipe(
+      tap(operacion => console.log('Datos de la operación:', operacion)),
+      catchError(error => {
+        console.error('Error al obtener la operación:', error);
+        throw error;
+      })
+    );
   }
+  
 
   eliminarOperacion(id_operacion:number): Observable<Object>{
     return this.httpClient.delete(`${this.baseURL}/${id_operacion}`);

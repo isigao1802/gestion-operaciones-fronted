@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Reunion } from '../reunion';
 import { ReunionService } from '../reunion.service';
 import  swal  from 'sweetalert2';
+import { FormatoFechaDirective } from '../directives/formato-fecha.directive';
+
 
 @Component({
   selector: 'app-modificar-reunion',

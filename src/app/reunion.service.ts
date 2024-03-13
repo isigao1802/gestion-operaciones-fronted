@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reunion } from './reunion';
+import { tap, catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +34,16 @@ export class ReunionService {
   }
 
   //este metodo sirve para obtener o buscar un reunion
-  obtenerReunionPorId(idReunion:number):Observable<Reunion>{
-    return this.httpClient.get<Reunion>(`${this.baseURL}/${idReunion}`);
+  obtenerReunionPorId(idReunion: number): Observable<Reunion> {
+    return this.httpClient.get<Reunion>(`${this.baseURL}/${idReunion}`).pipe(
+      tap(reunion => console.log('Datos de la reunión:', reunion)),
+      catchError(error => {
+        console.error('Error al obtener la reunión:', error);
+        throw error;
+      })
+    );
   }
+  
 
     //este metodo sirve para obtener o buscar un reunion
     obtenerReunionPorIdOperacion(idOperacion:number):Observable<Reunion[]>{

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas de Reunión</title>
+  <link rel="stylesheet" href="listar-tareas.component.css">
+</head>
+<body>
+  <div class="container">
+    <h3>Lista de Tareas de Reunión</h3>
+    <form id="checklistForm">
+      <div class="details-item">
+        <label for="saludo">Saludo / Oración</label>
+        <input type="checkbox" id="saludo" name="saludo">
+      </div>
+      <div class="details-item">
+        <label for="libro">Entregar libro al Comité</label>
+        <input type="checkbox" id="libro" name="libro">
+      </div>
+      <div class="details-item">
+        <label for="integrantes">Llamar Lista de Integrantes</label>
+        <input type="checkbox" id="integrantes" name="integrantes">
+      </div>
+      <div class="details-item">
+        <label for="recaudacion">Sumar Recaudación</label>
+        <input type="checkbox" id="recaudacion" name="recaudacion">
+      </div>
+      <button type="button" onclick="guardarTareasCompletadas()">Tareas Completadas</button>
+    </form>
+  </div>
+
+  <script>
+    function guardarTareasCompletadas() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const tareasCompletadas = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.id);
+
+      console.log('Tareas completadas:', tareasCompletadas);
+      // Aquí puedes realizar cualquier acción necesaria con las tareas completadas, como enviarlas a un servidor o procesarlas de alguna otra manera.
+      alert('Tareas completadas guardadas');
+    }
+  </script>
+</body>
+</html>

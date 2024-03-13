@@ -8,6 +8,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
 import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
 import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
+import { ListarTareasComponent } from './listar-tareas/listar-tareas.component';
 
 const routes: Routes = [
   { path: 'operaciones', component: ListaOperacionesComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'registrar-reunion', component: RegistrarReunionComponent },
   { path: 'operacion-detalles/:nroCuenta', component: OperacionDetallesComponent },
   { path: 'reunion-detalles/:idReunion', component: ReunionDetallesComponent },
+  { path: 'listar-tareas', component: ListarTareasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'operaciones', pathMatch: 'full' }, 

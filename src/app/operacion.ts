@@ -14,5 +14,6 @@ export class Operacion {
     saldo:number;
     fecha_cierre:Date;  
     nombre_grupo:String;
+    fecha_solicitud_formateada:Date;
   }
   

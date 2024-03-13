@@ -19,10 +19,11 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { CalendarModule, DatePickerModule, TimePickerModule, DateRangePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.component';
+import { ListarTareasComponent } from './listar-tareas/listar-tareas.component';
 import { CommonModule } from '@angular/common';
 import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
 import { DatePipe } from '@angular/common';
-
+import { FormatoFechaDirective } from './directives/formato-fecha.directive'; 
 
 registerLocaleData(localeEs, 'es');
 
@@ -34,7 +35,9 @@ registerLocaleData(localeEs, 'es');
     OperacionDetallesComponent,
     RegistrarReunionComponent,
     ListaReunionesComponent,
-    ModificarReunionComponent
+    ModificarReunionComponent,
+    FormatoFechaDirective,
+    ListarTareasComponent, 
     
   ],
   imports: [

@@ -14,4 +14,6 @@ export class Reunion {
     asesor:string;
     idOperacion:number;
     nroCuota:number;
+    fechaDeReunionFormateada:Date;
+    fechaCierreFormateada:Date;
 }
