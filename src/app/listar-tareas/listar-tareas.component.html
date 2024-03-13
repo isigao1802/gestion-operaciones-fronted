@@ -26,19 +26,14 @@
         <label for="recaudacion">Sumar Recaudación</label>
         <input type="checkbox" id="recaudacion" name="recaudacion">
       </div>
-      <button type="button" onclick="guardarTareasCompletadas()">Tareas Completadas</button>
+
+      <tr *ngIf="operacion">    
+      </tr>
+      <div class="button-container">
+      <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-danger" style="margin-right: 10px;">Volver a la lista</button>
+      <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-success" style="margin-right: 10px;">Cerrar Reunión</button>
+    </div>
     </form>
   </div>
-
-  <script>
-    function guardarTareasCompletadas() {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      const tareasCompletadas = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.id);
-
-      console.log('Tareas completadas:', tareasCompletadas);
-      // Aquí puedes realizar cualquier acción necesaria con las tareas completadas, como enviarlas a un servidor o procesarlas de alguna otra manera.
-      alert('Tareas completadas guardadas');
-    }
-  </script>
 </body>
 </html>

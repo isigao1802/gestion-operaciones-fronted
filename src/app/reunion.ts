@@ -16,4 +16,5 @@ export class Reunion {
     nroCuota:number;
     fechaDeReunionFormateada:Date;
     fechaCierreFormateada:Date;
+    estado:String;
 }

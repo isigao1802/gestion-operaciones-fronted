@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'registrar-reunion', component: RegistrarReunionComponent },
   { path: 'operacion-detalles/:nroCuenta', component: OperacionDetallesComponent },
   { path: 'reunion-detalles/:idReunion', component: ReunionDetallesComponent },
-  { path: 'listar-tareas', component: ListarTareasComponent },
+  { path: 'operaciones/reuniones/:idOperacion/listar-tareas', component: ListarTareasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'operaciones', pathMatch: 'full' }, 

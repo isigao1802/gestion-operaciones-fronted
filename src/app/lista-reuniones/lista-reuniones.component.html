@@ -6,6 +6,7 @@
       <th>Nombre de Grupo</th>
       <th>Asesor</th>
       <th>Fecha de Reunión</th>
+      <th style="text-align: center;">Estado</th>
       <th style="text-align: center;">Acciones</th>
     </tr>
   </thead>
@@ -15,10 +16,11 @@
       <td>{{reunion.nombreGrupo}}</td>
       <td>{{reunion.asesor}}</td>
       <td>{{reunion.fechaDeReunion | date:'dd/MM/yyyy'}}</td>
+      <td>{{reunion.estado}}</td>
       <td>
         <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
-        <button (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar Reunión</button>
-        <a href="/listar-tareas" class="btn btn-info" style="margin-right: 10px;">Lista de Tareas</a>
+        <button *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar Reunión</button>
+        <a *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" [routerLink]="['/operaciones/reuniones', reunion.idOperacion, 'listar-tareas']" class="btn btn-info" style="margin-right: 10px;">Lista de Tareas</a>
       </td>
     </tr>
   </tbody>
