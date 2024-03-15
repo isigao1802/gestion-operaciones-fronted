@@ -12,28 +12,27 @@
     <form id="checklistForm">
       <div class="details-item">
         <label for="saludo">Saludo / Oración</label>
-        <input type="checkbox" id="saludo" name="saludo">
+        <input type="checkbox" id="saludo" name="saludo" [(ngModel)]="saludoChecked">
       </div>
       <div class="details-item">
         <label for="libro">Entregar libro al Comité</label>
-        <input type="checkbox" id="libro" name="libro">
+        <input type="checkbox" id="libro" name="libro" [(ngModel)]="libroChecked">
       </div>
       <div class="details-item">
         <label for="integrantes">Llamar Lista de Integrantes</label>
-        <input type="checkbox" id="integrantes" name="integrantes">
+        <input type="checkbox" id="integrantes" name="integrantes" [(ngModel)]="integrantesChecked">
       </div>
       <div class="details-item">
         <label for="recaudacion">Sumar Recaudación</label>
-        <input type="checkbox" id="recaudacion" name="recaudacion">
+        <input type="checkbox" id="recaudacion" name="recaudacion" [(ngModel)]="recaudacionChecked">
       </div>
-
-      <tr *ngIf="operacion">    
-      </tr>
+  
       <div class="button-container">
-      <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-danger" style="margin-right: 10px;">Volver a la lista</button>
-      <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-success" style="margin-right: 10px;">Cerrar Reunión</button>
-    </div>
+        <button (click)="obtenerReunionesPorIdOperacion(operacion.idOperacion)" class="btn btn-danger" style="margin-right: 10px;">Volver a la lista</button>
+        <button (click)="cerrarReunion()" class="btn btn-success" style="margin-right: 10px;" [disabled]="!todosLosItemsMarcados()">Cerrar Reunión</button>
+      </div>
     </form>
   </div>
+  
 </body>
 </html>
