@@ -15,11 +15,20 @@ export class ListaOperacionesComponent implements OnInit {
 
   operaciones:Operacion[];
   reuniones:Reunion[];
+  asesorFiltro: string = '';
 
   constructor(private operacionServicio:OperacionService,private router:Router, private reunionServicio:ReunionService) { }
 
   ngOnInit(): void {
     this.obtenerOperaciones();
+  }
+
+
+  filtrarOperacionesPorAsesor(): Operacion[] {
+    if (!this.asesorFiltro) {
+      return this.operaciones; // Si no hay filtro, devuelve todas las operaciones
+    }
+    return this.operaciones.filter(operacion => operacion.asesor.toString().includes(this.asesorFiltro));
   }
 
   redirectToReuniones() {

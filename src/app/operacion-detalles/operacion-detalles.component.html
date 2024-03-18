@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <h3>Detalles de la Operación N° {{ operacion.id_operacion }}</h3>
+    <h3>Detalles de la Operación N° {{ operacion.id_operacion.toLocaleString('es-ES') }}</h3>
     <div class="details-item">
       <label class="details-label">Nro de Cuenta Grupal :</label>
       <span class="details-value">{{ operacion.nro_cuenta_cliente.toLocaleString('es-ES') }}</span>

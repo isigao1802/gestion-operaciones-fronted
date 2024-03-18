@@ -21,7 +21,7 @@ export class OperacionDetallesComponent implements OnInit {
     this.operacion = new Operacion();
     this.operacionServicio.obtenerOperacionPorId(this.nroCuenta).subscribe(dato => {
       this.operacion = dato;
-      swal(`Detalles de la Operación ${this.operacion.nro_cuenta_cliente}`);
+      //swal(`Detalles de la Operación ${this.operacion.nro_cuenta_cliente}`);
     });
   }
 

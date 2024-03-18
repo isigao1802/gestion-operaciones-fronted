@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Operacion } from './operacion';
 import { ReunionService } from './reunion.service';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,15 @@ export class OperacionService {
   constructor(private httpClient : HttpClient, private reunionService:ReunionService) { }
 
   //este metodo nos sirve para obtener las operaciones
-  obtenerListaDeOperaciones():Observable<Operacion[]>{
-    return this.httpClient.get<Operacion[]>(`${this.baseURL}/${this.lista_operaciones}`);
-  }
+ // obtenerListaDeOperaciones():Observable<Operacion[]>{
+ //   return this.httpClient.get<Operacion[]>(`${this.baseURL}/${this.lista_operaciones}`);
+  //}
 
+  obtenerListaDeOperaciones(): Observable<Operacion[]> {
+    return this.httpClient.get<Operacion[]>(`${this.baseURL}/${this.lista_operaciones}`).pipe(
+      map(operaciones => operaciones.sort((a, b) => b.id_operacion - a.id_operacion))
+    );
+  }
   
   //este metodo nos sirve para registrar una operacion
   registrarOperacion(operacion:Operacion) : Observable<Object>{

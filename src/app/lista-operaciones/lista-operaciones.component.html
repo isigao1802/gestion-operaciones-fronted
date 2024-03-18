@@ -1,4 +1,12 @@
+<!-- tu-componente.component.html -->
+
 <h2>Lista Operaciones</h2>
+
+<div>
+  <label for="filtrarOperacionesPorAsesor">Filtrar por Asesor:</label>
+  <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro">
+</div>
+
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
@@ -11,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor= "let operacion of operaciones">
+    <tr *ngFor="let operacion of filtrarOperacionesPorAsesor()">
       <td style="text-align: center;">{{operacion.id_operacion}}</td>
       <td>{{operacion.nro_cuenta_cliente}}</td>
       <td>{{operacion.nombre_grupo}}</td>
@@ -21,7 +29,6 @@
         <div class="d-inline-block">
           <button (click)="verDetallesDelaOperacion(operacion.id_operacion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
           <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-primary">Lista de Reuniones</button>
-
         </div>
       </td>      
     </tr>
