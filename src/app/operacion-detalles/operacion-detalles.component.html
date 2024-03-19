@@ -10,12 +10,44 @@
   <div class="container">
     <h3>Detalles de la Operación N° {{ operacion.id_operacion.toLocaleString('es-ES') }}</h3>
     <div class="details-item">
-      <label class="details-label">Nro de Cuenta Grupal :</label>
+      <label class="details-label">Tipo de Operación:</label>
+      <span class="details-value">{{ operacion.tipo_operacion }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Nro de Cuenta Cliente :</label>
       <span class="details-value">{{ operacion.nro_cuenta_cliente.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Nombre Cliente :</label>
+      <span class="details-value">{{ operacion.nombre_grupo }}</span>
     </div>
     <div class="details-item">
       <label class="details-label">Asesor:</label>
       <span class="details-value">{{ operacion.asesor }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Sucursal:</label>
+      <span class="details-value">{{ operacion.sucursal }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Cierre:</label>
+      <span class="details-value">{{ operacion.fecha_cierre }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Desembolso:</label>
+      <span class="details-value">{{ operacion.fecha_desembolso | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Fecha de Solicitud:</label>
+      <span class="details-value">{{ operacion.fecha_solicitud_formateada}}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Monto del Préstamo:</label>
+      <span class="details-value">{{ operacion.monto_prestamo.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Tasa:</label>
+      <span class="details-value">{{ operacion.tasa }}%</span>
     </div>
     <div class="details-item">
       <label class="details-label">Monto desembolsado:</label>
@@ -40,6 +72,38 @@
     <div class="details-item">
       <label class="details-label">Interés:</label>
       <span class="details-value">{{ operacion.interes.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Iva de Interés:</label>
+      <span class="details-value">{{ operacion.iva_interes.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Mantenimiento Linea de Crédito:</label>
+      <span class="details-value">{{ operacion.mantenimiento_linea_credito.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Prevención Emergencias:</label>
+      <span class="details-value">{{ operacion.prevencion_emergencias.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Cantidad de Cuotas:</label>
+      <span class="details-value">{{ operacion.cantidad_de_cuotas }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Monto Cuotas:</label>
+      <span class="details-value">{{ operacion.monto_cuota.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Periodo cuotas (días):</label>
+      <span class="details-value">{{ operacion.periodo_cuota_dias.toLocaleString('es-ES') }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Banca:</label>
+      <span class="details-value">{{ operacion.banca }}</span>
+    </div>
+    <div class="details-item">
+      <label class="details-label">Calificación:</label>
+      <span class="details-value">{{ operacion.calificacion }}</span>
     </div>
   </div>
 </body>

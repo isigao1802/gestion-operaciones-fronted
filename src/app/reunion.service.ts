@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reunion } from './reunion';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -47,7 +47,9 @@ export class ReunionService {
 
     //este metodo sirve para obtener o buscar un reunion
     obtenerReunionPorIdOperacion(idOperacion:number):Observable<Reunion[]>{
-      return this.httpClient.get<Reunion[]>(`${this.baseURL}/${this.porIdOperacion}/${idOperacion}`);
+      return this.httpClient.get<Reunion[]>(`${this.baseURL}/${this.porIdOperacion}/${idOperacion}`).pipe(
+        map(reuniones => reuniones.sort((a, b) => a.idReunion - b.idReunion))
+      );;
     }
 
   eliminarReunion(id_reunion:number): Observable<Object>{

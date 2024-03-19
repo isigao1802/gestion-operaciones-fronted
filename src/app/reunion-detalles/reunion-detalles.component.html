@@ -8,26 +8,22 @@
 </head>
 <body>
   <div class="container">
-    <h3>Detalles de la Reunión N° {{ reunion.idReunion }}</h3>
+    <h3>Detalles de la Reunión N° {{ reunion.nroCuota }}</h3>
     <div class="details-item">
       <label class="details-label">N° Operación:</label>
-      <span class="details-value">{{ reunion.idOperacion }}</span>
+      <span class="details-value">{{ reunion.idOperacion.toLocaleString('es-ES') }}</span>
     </div>
     <div class="details-item">
       <label class="details-label">Asesor:</label>
       <span class="details-value">{{ reunion.asesor }}</span>
     </div>
     <div class="details-item">
-      <label class="details-label">Monto desembolsado:</label>
-      <span class="details-value">{{ reunion.monto_desembolso }}</span>
-    </div>
-    <div class="details-item">
-      <label class="details-label">Nombre del Grupo:</label>
+      <label class="details-label">Nombre del Cliente:</label>
       <span class="details-value">{{ reunion.nombreGrupo }}</span>
     </div>
     <div class="details-item">
-      <label class="details-label">Número de cuenta del Grupo:</label>
-      <span class="details-value">{{ reunion.nroCuentaCliente }}</span>
+      <label class="details-label">Número de cuenta del Cliente:</label>
+      <span class="details-value">{{ reunion.nroCuentaCliente.toLocaleString('es-ES') }}</span>
     </div>
     <div class="details-item">
       <label class="details-label">Fecha de Reunión:</label>
@@ -38,7 +34,7 @@
       <span class="details-value">{{ reunion.fechaCierreFormateada }}</span>
     </div>
     <div class="details-item">
-      <label class="details-label">Estado</label>
+      <label class="details-label">Estado de la Reunión: </label>
       <span class="details-value">{{ reunion.estado }}</span>
     </div>
   </div>

@@ -20,7 +20,8 @@ export class ListaOperacionesComponent implements OnInit {
   constructor(private operacionServicio:OperacionService,private router:Router, private reunionServicio:ReunionService) { }
 
   ngOnInit(): void {
-    this.obtenerOperaciones();
+    //this.obtenerOperaciones();
+    this.obtenerOperacionesPorTipos([901, 903, 905]);
   }
 
 
@@ -55,6 +56,15 @@ export class ListaOperacionesComponent implements OnInit {
       console.log(dato);
     });
   }
+
+  private obtenerOperacionesPorTipos(tiposOperacion: number[]) {
+    this.operacionServicio.obtenerListaDeOperaciones().subscribe(dato => {
+      // Filtrar las operaciones por los tipos especificados
+      this.operaciones = dato.filter(operacion => tiposOperacion.includes(operacion.tipo_operacion));
+      console.log(this.operaciones);
+    });
+  }
+
 
     eliminarOperacion(id:number){
       swal({
