@@ -24,9 +24,9 @@ export class ListarTareasComponent implements OnInit{
   reunion:Reunion = new Reunion();
 
   ngOnInit(): void {
+    this.idReunion = this.route.snapshot.params['idReunion'];
     this.idOperacion = this.route.snapshot.params['idOperacion'];
     this.obtenerDatosDeLaOperacion()
-    this.idReunion = this.route.snapshot.params['idReunion'];
     this.reunionService.obtenerReunionPorId(this.idReunion).subscribe(dato =>{
       this.reunion = dato;
     },error => console.log(error));

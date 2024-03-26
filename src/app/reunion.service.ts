@@ -48,7 +48,7 @@ export class ReunionService {
     //este metodo sirve para obtener o buscar un reunion
     obtenerReunionPorIdOperacion(idOperacion:number):Observable<Reunion[]>{
       return this.httpClient.get<Reunion[]>(`${this.baseURL}/${this.porIdOperacion}/${idOperacion}`).pipe(
-        map(reuniones => reuniones.sort((a, b) => a.idReunion - b.idReunion))
+        map(reuniones => reuniones.sort((a, b) => a.nroCuota - b.nroCuota))
       );;
     }
 

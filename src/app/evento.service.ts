@@ -10,10 +10,14 @@ export class EventoService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerEventos(): Observable<any[]> {
+  
+  obtenerEventoServices(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
+  obtenerEventoPorAsesor(asesor:String):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/${asesor}`);
+  }
   obtenerEventosPorFecha(start: string, end: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/por-fecha?start=${start}&end=${end}`);
   }

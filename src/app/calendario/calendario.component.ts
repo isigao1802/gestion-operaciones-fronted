@@ -21,6 +21,7 @@ import { EventoService } from '../evento.service';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
+  asesorFiltro: string = '';
   eventos: any[] = [];
   calendarVisible = signal(true);
   calendarOptions = signal<CalendarOptions>({
@@ -59,7 +60,7 @@ export class CalendarioComponent implements OnInit {
     eventsSet: this.handleEvents.bind(this),
     eventSources: [
       {
-        url: 'http://localhost:8080/eventos', // URL del endpoint en Spring Boot
+        url: 'http://localhost:8080/eventos', // URL del endpoint en el Back
         
       }
     ],
@@ -77,9 +78,10 @@ export class CalendarioComponent implements OnInit {
   }
 
   obtenerEventos() {
-    this.eventoService.obtenerEventos().subscribe(
+    this.eventoService.obtenerEventoServices().subscribe(
       (data) => {
         this.eventos = data;
+        console.log('Eventos traidos desde el Back: ', this.eventos);
         this.actualizarEventosEnCalendario();
       },
       (error) => {
