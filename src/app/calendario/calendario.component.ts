@@ -11,16 +11,16 @@ import { INITIAL_EVENTS, createEventId } from './event-utils';
 import esLocale from '@fullcalendar/core/locales/es';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import { EventoService } from '../evento.service';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, FullCalendarModule],
+  selector: 'app-calendario',
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
+
 export class CalendarioComponent implements OnInit {
+  searchTitle: string = '';
   asesorFiltro: string = '';
   eventos: any[] = [];
   calendarVisible = signal(true);
@@ -60,7 +60,8 @@ export class CalendarioComponent implements OnInit {
     eventsSet: this.handleEvents.bind(this),
     eventSources: [
       {
-        url: 'http://localhost:8080/eventos', // URL del endpoint en el Back
+        url: 'http://localhost:8080/eventos',
+        extraParams: { asesor: this.searchTitle } // URL del endpoint en el Back
         
       }
     ],
@@ -68,15 +69,39 @@ export class CalendarioComponent implements OnInit {
   
   currentEvents = signal<EventApi[]>([]);
   
-  constructor(private changeDetector: ChangeDetectorRef, private eventoService: EventoService) {
+  constructor(private changeDetector: ChangeDetectorRef, private eventoService: EventoService, private http: HttpClient) {
   }
 
   
   ngOnInit() {
-    this.obtenerEventos();
+   // this.obtenerEventos();
     
   }
 
+
+  buscar() {
+    console.log('searchTitle:', this.searchTitle);
+    this.eventoService.obtenerEventoPorUDE(this.searchTitle).subscribe(
+      (data) => {
+        this.eventos = data;
+        console.log('Eventos traidos con el filtro: ', this.eventos);
+        this.actualizarEventosEnCalendario();
+       
+      },
+      (error) => {
+        console.error('Error al buscar en la base de datos:', error);
+      }
+    );
+  }
+
+
+  
+  logTitle(title: string) {
+    console.log(title);
+  }
+
+
+  
   obtenerEventos() {
     this.eventoService.obtenerEventoServices().subscribe(
       (data) => {
@@ -89,8 +114,6 @@ export class CalendarioComponent implements OnInit {
       }
     );
   }
-
-
   
   actualizarEventosEnCalendario() {
     this.calendarOptions.update(options => ({

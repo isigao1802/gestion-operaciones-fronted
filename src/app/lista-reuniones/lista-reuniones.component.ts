@@ -43,7 +43,24 @@ export class ListaReunionesComponent implements OnInit{
     });
   }
 
-
+  getColorForConteo(conteoModificacion: number): string {
+    if (conteoModificacion > 1) {
+      return 'red'; // color rojo para conteo mayor que 1
+    }  else {
+      return 'black'; // color negro para otros valores de conteo
+    }
+  }
+  
+  
+  getFontStyleForConteo(conteoModificacion: number): string {
+    // Devuelve 'italic' solo si el conteo es > 1
+    if (conteoModificacion > 1) {
+      return 'italic';
+    } else {
+      return 'normal'; // Para otros estados, devuelve 'normal'
+    }
+  }
+  
     eliminarReunion(id:number){
       swal({
         title: '¿Estas seguro?',

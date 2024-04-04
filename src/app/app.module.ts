@@ -26,6 +26,7 @@ import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion
 import { DatePipe } from '@angular/common';
 import { FormatoFechaDirective } from './directives/formato-fecha.directive'; 
 import { AuthService } from './auth.service';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 registerLocaleData(localeEs, 'es');
 
@@ -40,6 +41,7 @@ registerLocaleData(localeEs, 'es');
     ModificarReunionComponent,
     FormatoFechaDirective,
     ListarTareasComponent, 
+    CalendarioComponent,
     
   ],
   imports: [
@@ -61,6 +63,7 @@ registerLocaleData(localeEs, 'es');
     DateRangePickerModule, 
     DateTimePickerModule,
     CommonModule,
+    FullCalendarModule,
     
   ],
   providers: [MatDatepickerModule,

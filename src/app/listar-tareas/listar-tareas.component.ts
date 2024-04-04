@@ -48,6 +48,7 @@ export class ListarTareasComponent implements OnInit{
       swal(`Se ha cerrado la reunión exitosamente`,'', 'success');
       this.reunion.estado="CERRADA";
       this.reunionService.actualizarReunion(this.idReunion,this.reunion).subscribe(dato => {
+        console.log("Id Operación: ",this.idOperacion);
         this.obtenerReunionesPorIdOperacion(this.idOperacion); 
       },error => console.log(error));
     } else {

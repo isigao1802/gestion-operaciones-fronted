@@ -10,6 +10,7 @@ export class Reunion {
     nroCuentaCliente:number;
     prestamo_interno:number;
     horaReunion:string;
+    horaReunionCierre:string;
     frecuencia:number;
     asesor:string;
     idOperacion:number;
@@ -17,4 +18,5 @@ export class Reunion {
     fechaDeReunionFormateada:Date;
     fechaCierreFormateada:Date;
     estado:String;
+    conteoModificacion:number;
 }
