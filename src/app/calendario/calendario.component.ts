@@ -12,6 +12,7 @@ import esLocale from '@fullcalendar/core/locales/es';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import { EventoService } from '../evento.service';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendario',
@@ -24,6 +25,8 @@ export class CalendarioComponent implements OnInit {
   asesorFiltro: string = '';
   eventos: any[] = [];
   calendarVisible = signal(true);
+  extraParams: any = {};
+  
   calendarOptions = signal<CalendarOptions>({
     plugins: [
       multiMonthPlugin,
@@ -60,24 +63,39 @@ export class CalendarioComponent implements OnInit {
     eventsSet: this.handleEvents.bind(this),
     eventSources: [
       {
-        url: 'http://localhost:8080/eventos',
-        extraParams: { asesor: this.searchTitle } // URL del endpoint en el Back
-        
+        url: 'http://localhost:8080/eventos/buscarPorUde',
+        extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
+        success: this.handleSuccess.bind(this)
       }
     ],
   });
   
+  handleSuccess(response: any) {
+    const url = (this.calendarOptions() as any).eventSources[0].url;
+  const extraParams = (this.calendarOptions() as any).eventSources[0].extraParams;
+    console.log('Extra Params:', extraParams);
+  }
+
   currentEvents = signal<EventApi[]>([]);
   
+  private searchTitleSubscription: Subscription;
   constructor(private changeDetector: ChangeDetectorRef, private eventoService: EventoService, private http: HttpClient) {
   }
 
   
   ngOnInit() {
-   // this.obtenerEventos();
-    
+    this.calendarVisible.set(true);
+    console.log('Calendario:', this.calendarVisible);
+    //this.buscar();
+  
   }
 
+  ngOnDestroy() {
+    // Asegúrate de cancelar la suscripción para evitar fugas de memoria
+    if (this.searchTitleSubscription) {
+      this.searchTitleSubscription.unsubscribe();
+    }
+  }
 
   buscar() {
     console.log('searchTitle:', this.searchTitle);
@@ -115,25 +133,40 @@ export class CalendarioComponent implements OnInit {
     );
   }
   
-  actualizarEventosEnCalendario() {
-    this.calendarOptions.update(options => ({
+actualizarEventosEnCalendario() {
+  this.calendarOptions.update(options => {
+    const updatedEvents = this.eventos.map(evento => {
+      if (evento.startDay && evento.endDay) {
+        const formattedStart = this.formatToISOWithOffset(evento.startStr);
+        const formattedEnd = this.formatToISOWithOffset(evento.endDay);
+        const updatedEvent = {
+          ...evento,
+          startStr: formattedStart,
+          end: formattedEnd,
+          display: 'auto' 
+        };
+        return updatedEvent;
+      } else {
+        return null; 
+      }
+    }).filter(evento => evento !== null);
+
+    console.log('Eventos actualizados:', updatedEvents);
+    
+    return {
       ...options,
-      initialEvents: this.eventos.map(evento => {
-        if (evento.startDay && evento.endDay) {
-          const formattedStart = this.formatToISOWithOffset(evento.startStr);
-          const formattedEnd = this.formatToISOWithOffset(evento.endDay);
-          return {
-            ...evento,
-            startStr: formattedStart,
-            end: formattedEnd,
-            display: 'auto' 
-          };
-        } else {
-          return null; 
-        }
-      }).filter(evento => evento !== null) 
-    }));
-  }
+      initialEvents: updatedEvents,
+          eventSources: [
+      {
+        url: 'http://localhost:8080/eventos/buscarPorUde',
+        extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
+        success: this.handleSuccess.bind(this)
+      }
+    ],
+    };
+  });
+}
+
   
 
   formatToISOWithOffset(date: Date | string): string {
