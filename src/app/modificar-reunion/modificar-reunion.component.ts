@@ -4,6 +4,7 @@ import { Reunion } from '../reunion';
 import { ReunionService } from '../reunion.service';
 import  swal  from 'sweetalert2';
 import { FormatoFechaDirective } from '../directives/formato-fecha.directive';
+import { DatePipe, formatDate } from '@angular/common';
 
 
 @Component({
@@ -15,8 +16,10 @@ export class ModificarReunionComponent implements OnInit{
   reuniones:Reunion[];
   idReunion:number;
   reunion:Reunion = new Reunion();
-  constructor(private reunionService:ReunionService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private datePipe: DatePipe,private reunionService:ReunionService,private router:Router,private route:ActivatedRoute) { }
 
+
+  
   ngOnInit(): void {
     this.idReunion = this.route.snapshot.params['idReunion'];
     this.reunionService.obtenerReunionPorId(this.idReunion).subscribe(dato =>{
@@ -44,5 +47,11 @@ export class ModificarReunionComponent implements OnInit{
       this.irAlaListaDeReuniones();
     },error => console.log(error));
   }
+
+  formatearFecha(fecha: Date): string {
+    // Utiliza la función formatDate para formatear la fecha como desees
+    return formatDate(fecha, 'dd/MM/yyyy', 'en-US'); // Cambia 'en-US' al idioma que necesites
+  }
+
 
 }

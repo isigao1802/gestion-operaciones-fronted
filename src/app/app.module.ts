@@ -28,6 +28,7 @@ import { FormatoFechaDirective } from './directives/formato-fecha.directive';
 import { AuthService } from './auth.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
