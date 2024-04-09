@@ -29,7 +29,7 @@ export class ModificarReunionComponent implements OnInit{
 
   irAlaListaDeReuniones(){
     this.router.navigate(['/operaciones/reuniones/'+ this.reunion.idOperacion]);
-    swal('Reunión actualizada',`La Reunión <strong>${this.reunion.idReunion}</strong> de la Operación <strong>${this.reunion.idOperacion}</strong> ha sido actualizada con exito`,`success`);
+    swal('Reunión actualizada',`La Reunión <strong>${this.reunion.nroCuota}</strong> de la Operación <strong>${this.reunion.idOperacion}</strong> ha sido actualizada con exito`,`success`);
   }
 
 
