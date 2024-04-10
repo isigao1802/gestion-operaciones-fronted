@@ -55,7 +55,7 @@ export class CalendarioComponent implements OnInit {
     initialEvents: this.eventos ,
     weekends: true,
     editable: false,
-    selectable: false,
+    selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),

@@ -19,6 +19,8 @@
       <div *ngIf="arg.event.title.toLowerCase().includes(searchTitle.toLowerCase())">
         <i>{{ arg.event.title }}</i>
         <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunion }}</i>
+        <i style="margin-left: 10px;">-</i>
+        <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunionCierre }}</i>
       </div>
     </ng-template>
   </full-calendar>
