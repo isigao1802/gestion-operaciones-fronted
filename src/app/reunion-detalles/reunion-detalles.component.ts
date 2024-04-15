@@ -6,6 +6,10 @@ import { Operacion } from '../operacion';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
 import { DatePipe } from '@angular/common';
+import { formatDate } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -19,7 +23,7 @@ export class ReunionDetallesComponent implements OnInit{
   
   idReunion:number;
   reunion:Reunion;
-  constructor(private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
+  constructor(private datePipe: DatePipe, private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
 
 
   ngOnInit(): void {

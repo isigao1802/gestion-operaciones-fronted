@@ -27,7 +27,7 @@ import { DatePipe } from '@angular/common';
 import { FormatoFechaDirective } from './directives/formato-fecha.directive'; 
 import { AuthService } from './auth.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
+import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -43,6 +43,7 @@ registerLocaleData(localeEs, 'es');
     FormatoFechaDirective,
     ListarTareasComponent, 
     CalendarioComponent,
+    ReunionDetallesComponent
     
   ],
   imports: [
@@ -65,11 +66,14 @@ registerLocaleData(localeEs, 'es');
     DateTimePickerModule,
     CommonModule,
     FullCalendarModule,
-    
+    FormsModule,
   ],
   providers: [MatDatepickerModule,
     DatePipe,AuthService,
   { provide: MAT_DATE_LOCALE, useValue: 'es' },],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    ReunionDetallesComponent
+  ]
 })
 export class AppModule { }
