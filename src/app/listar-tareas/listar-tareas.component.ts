@@ -14,10 +14,11 @@ import  swal  from 'sweetalert2';
 })
 export class ListarTareasComponent implements OnInit{
   
-  saludoChecked: boolean = false;
-  libroChecked: boolean = false;
-  integrantesChecked: boolean = false;
-  recaudacionChecked: boolean = false;
+  aperturaChecked: boolean = false;
+  adoracionChecked: boolean = false;
+  aprendizajeChecked: boolean = false;
+  accionChecked: boolean = false;
+  adiosChecked: boolean = false;
 
   idReunion:number;
   idOperacion:number;
@@ -38,7 +39,7 @@ export class ListarTareasComponent implements OnInit{
   constructor(private reunionService:ReunionService,private operacionServicio:OperacionService,private route:ActivatedRoute,private router:Router, private reunionServicio:ReunionService) { }
 
   todosLosItemsMarcados(): boolean {
-    return this.saludoChecked && this.libroChecked && this.integrantesChecked && this.recaudacionChecked;
+    return this.aperturaChecked && this.adoracionChecked && this.aprendizajeChecked && this.accionChecked && this.adiosChecked;
   }
 
   cerrarReunion() {

@@ -1,27 +1,63 @@
-<h2>Lista de Reuniones de la Operación N° {{ idOperacion }}</h2>
-<table class="table table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th style="text-align: center;">N° de Reunión</th>
-      <th>Nombre de Cliente</th>
-      <th>Asesor</th>
-      <th>Fecha de Reunión</th>
-      <th style="text-align: center;">Estado</th>
-      <th style="text-align: center;">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let reunion of reuniones">
-      <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nroCuota }}</td>
-      <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nombreGrupo }}</td>
-      <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.asesor }}</td>
-      <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.fechaDeReunion | date:'dd/MM/yyyy' }}</td>
-      <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.estado }}</td>
-      <td>
-        <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
-        <button *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar Reunión</button>
-        <a *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" [routerLink]="['/operaciones/reuniones',  reunion.idReunion,reunion.idOperacion, 'listar-tareas']" class="btn btn-info" style="margin-right: 10px;">Lista de Tareas</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Reuniones</title>
+  <!-- Agrega aquí tus enlaces a CSS y otras dependencias -->
+</head>
+<body>
+  <h2>Lista de Reuniones de la Operación N° {{ idOperacion }}</h2>
+  <button *ngIf="mostrarBotonAgregarHora" (click)="mostrarFormulario()" class="btn btn-primary">Añadir Hora de Reuniones</button>
+
+  <!-- Formulario para añadir hora de reuniones -->
+  <div *ngIf="mostrarFormularioAgregarHora" class="formulario-agregar-hora">
+    <form (ngSubmit)="guardarReunion()" #reunionForm="ngForm">
+      <div class="form-group">
+        <div class="input-wrapper">
+          <label class="label-hora">Hora de Inicio de Reuniones:</label>
+          <input type="text" class="form-control input-centrado" id="horaReunion" [ngxTimepicker]="timepicker" [(ngModel)]="reunion.horaReunion" name="horaReunion" [value]="'08:00'" [format]="24" style="display: inline; width: 100px; margin-right: 8px;" readonly>
+          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+          <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
+        </div>
+      </div>
+      <button class="btn btn-success" style="margin-right: 10px;">Registrar Horario</button>
+      <button (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+    </form>
+  </div>
+  
+<!-- Hasta Aqui Formulario para añadir hora de reuniones -->
+
+
+
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th style="text-align: center;">N° de Reunión</th>
+        <th>Nombre de Cliente</th>
+        <th>Asesor</th>
+        <th>Fecha de Reunión</th>
+        <th style="text-align: center;">Estado</th>
+        <th style="text-align: center;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reunion of reuniones">
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nroCuota }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nombreGrupo }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.asesor }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.fechaDeReunion | date:'dd/MM/yyyy' }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.estado }}</td>
+        <td>
+          <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
+          <button *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar Reunión</button>
+          <a *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" [routerLink]="['/operaciones/reuniones',  reunion.idReunion,reunion.idOperacion, 'listar-tareas']" class="btn btn-info" style="margin-right: 10px;">Lista de Tareas</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Agrega aquí tus scripts o enlaces a JavaScript si es necesario -->
+</body>
+</html>

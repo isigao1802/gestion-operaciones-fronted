@@ -1,0 +1,21 @@
+.input-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .label-hora {
+    margin-right: 8px; /* Ajusta el margen según tus necesidades */
+  }
+
+  .input-hora {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+  }
+  
+  .mat-icon {
+    margin-left: 8px; /* Espacio entre el input y el icono del relojito */
+  }
+  
+  .input-centrado {
+    width: 150px; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Establece margen automático a izquierda y derecha para centrar */
+  }

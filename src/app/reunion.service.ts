@@ -14,6 +14,7 @@ export class ReunionService {
   private baseURL = "http://localhost:8080/reuniones";
   private lista_reuniones = "buscarReuniones";
   private porIdOperacion = "obtenerPorIdOperacion";
+  private updateHora = "updateHora";
 
 
   constructor(private httpClient : HttpClient) { }
@@ -28,10 +29,18 @@ export class ReunionService {
     return this.httpClient.post(`${this.baseURL}`,reunion);
   }
 
-  //este metodo sirve para actualizar el reunion
+  //este metodo sirve para actualizar la reunión completa
   actualizarReunion(idReunion:number,reunion:Reunion) : Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${idReunion}`,reunion);
   }
+
+
+    //este metodo sirve para actualizar la hora de las reuniones
+    actualizarHoraReunion(idOperacion:number,reunion:Reunion) : Observable<Object>{
+      return this.httpClient.put(`${this.baseURL}/${this.updateHora}/${idOperacion}`,reunion);
+    }
+
+
 
   //este metodo sirve para obtener o buscar un reunion
   obtenerReunionPorId(idReunion: number): Observable<Reunion> {
@@ -45,7 +54,7 @@ export class ReunionService {
   }
   
 
-    //este metodo sirve para obtener o buscar un reunion
+    //este metodo sirve para obtener o buscar reuniones de una determinada operación
     obtenerReunionPorIdOperacion(idOperacion:number):Observable<Reunion[]>{
       return this.httpClient.get<Reunion[]>(`${this.baseURL}/${this.porIdOperacion}/${idOperacion}`).pipe(
         map(reuniones => reuniones.sort((a, b) => a.nroCuota - b.nroCuota))

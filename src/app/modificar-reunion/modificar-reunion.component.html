@@ -1,231 +1,100 @@
 <div class="col-md-6 offset-md-3">
-    <h2 class="text-center">Actualizar Reunión</h2>
-    <form (ngSubmit)= "onSubmit()" #reunionForm = "ngForm">
-      <div class="form-group">
-        <label>N° Reunión : </label>
-        <div class="input-wrapper">
-        <input type = "text"
-        class="form-control"
-        id = "idReunion"
-        [(ngModel)] = "reunion.nroCuota"
-        name = "idReunion"
-        required
-        minlength="1"
-        maxlength="10"
-        placeholder="Digite su nombre "
-        #idReunion = "ngModel"
-        readonly
-        >
-        <div class="alert alert-danger" *ngIf= "idReunion.invalid && (idReunion.dirty || idReunion.touched)">
-          <div *ngIf = "idReunion.errors.required">
-            Digite el id de transferencia por favor
-          </div>
-          <div *ngIf = "idReunion.errors.minlength">
-            El nombre tiene que contener como minimo 1 caracter.
-          </div>
-          <div *ngIf = "idReunion.errors.maxlength">
-            El nombre tiene que tener como maximo 10 caracteres.
-          </div>
+  <h2 class="text-center">Actualizar Reunión</h2>
+  <form (ngSubmit)="onSubmit()" #reunionForm="ngForm">
+    <div class="form-group">
+      <label>N° Reunión:</label>
+      <div class="input-wrapper">
+        <input type="text" class="form-control" id="idReunion" [(ngModel)]="reunion.nroCuota" name="idReunion" required minlength="1" maxlength="10" placeholder="Digite su nombre" #idReunion="ngModel" readonly>
+        <div class="alert alert-danger" *ngIf="idReunion.invalid && (idReunion.dirty || idReunion.touched)">
+          <div *ngIf="idReunion.errors.required">Digite el id de reunion por favor</div>
+          <div *ngIf="idReunion.errors.minlength">El nombre tiene que contener como mínimo 1 caracter.</div>
+          <div *ngIf="idReunion.errors.maxlength">El nombre tiene que tener como máximo 10 caracteres.</div>
         </div>
       </div>
-      </div>
-  
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>Nombre de Grupo : </label>
-        <input type = "text"
-        class="form-control"
-        id = "nombreGrupo"
-        [(ngModel)] = "reunion.nombreGrupo"
-        name = "nombreGrupo"
-        required
-        minlength="1"
-        maxlength="40"
-        placeholder="Digite el nombre del Grupo"
-        #nombreGrupo = "ngModel"
-        readonly
-        >
-        <div class="alert alert-danger" *ngIf= "nombreGrupo.invalid && (nombreGrupo.dirty || nombreGrupo.touched)">
-          <div *ngIf = "nombreGrupo.errors.required">
-            Digite el nombre del grupo por favor
-          </div>
-          <div *ngIf = "nombreGrupo.errors.minlength">
-            El nombre del grupo debe contener como minimo 4 caracteres
-          </div>
-          <div *ngIf = "nombreGrupo.errors.maxlength">
-            El nombre del grupo debe tener como maximo 10 caracteres
-          </div>
-        </div>
-       </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>Número de Cuenta Grupal: </label>
-        <input type = "text"
-        class="form-control"
-        id = "cuentaGrupo"
-        [(ngModel)] = "reunion.nroCuentaCliente"
-        name = "cuentaGrupo"
-        required
-        minlength="1"
-        maxlength="40"
-        placeholder="Digite el número de cuenta del Grupo"
-        #cuentaGrupo = "ngModel"
-        readonly
-        >
-        <div class="alert alert-danger" *ngIf= "cuentaGrupo.invalid && (cuentaGrupo.dirty || cuentaGrupo.touched)">
-          <div *ngIf = "cuentaGrupo.errors.required">
-            Digite el número de cuenta del grupo por favor
-          </div>
-          <div *ngIf = "cuentaGrupo.errors.minlength">
-            El número de cuenta del grupo debe contener como minimo 4 caracteres
-          </div>
-          <div *ngIf = "cuentaGrupo.errors.maxlength">
-            El número de cuenta  del grupo debe tener como maximo 10 caracteres
-          </div>
-        </div>
-       </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>Asesor : </label>
-        <input type = "text"
-        class="form-control"
-        id = "asesor"
-        [(ngModel)] = "reunion.asesor"
-        name = "asesor"
-        required
-        minlength="1"
-        maxlength="40"
-        placeholder="Digite el nombre del asesor"
-        #asesor = "ngModel"
-        readonly
-        >
-        <div class="alert alert-danger" *ngIf= "asesor.invalid && (asesor.dirty || asesor.touched)">
-          <div *ngIf = "asesor.errors.required">
-            Digite el asesor por favor
-          </div>
-          <div *ngIf = "asesor.errors.minlength">
-            El asesor debe contener como minimo 4 caracteres
-          </div>
-          <div *ngIf = "asesor.errors.maxlength">
-            El asesor debe tener como maximo 10 caracteres
-          </div>
-        </div>
-       </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>N° de Operación : </label>
-        <input type = "text"
-        class="form-control"
-        id = "idOperacion"
-        [(ngModel)] = "reunion.idOperacion"
-        name = "idOperacion"
-        required
-        minlength="1"
-        maxlength="40"
-        #idOperacion = "ngModel"
-        readonly
-        >
-        <div class="alert alert-danger" *ngIf= "idOperacion.invalid && (idOperacion.dirty || idOperacion.touched)">
-          <div *ngIf = "idOperacion.errors.required">
-            Digite el id de la operación por favor
-          </div>
-          <div *ngIf = "idOperacion.errors.minlength">
-            El id de la operación debe contener como minimo 4 caracteres
-          </div>
-          <div *ngIf = "idOperacion.errors.maxlength">
-            El id de la operación debe tener como maximo 10 caracteres
-          </div>
-        </div>
-       </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>Fecha de Cierre : </label>
-        <input type = "text"
-        class="form-control"
-        id = "fechaCierre"
-        [(ngModel)] = "reunion.fechaCierreFormateada"
-        name = "fechaCierre"
-        required
-        minlength="1"
-        maxlength="40"
-        #fechaCierre = "ngModel"
-        readonly
-        appFormatoFecha
-        >
-       </div>
-      </div>
-
-      <div class="form-group">
-        <div class="input-wrapper">
-        <label>Fecha de Reunión</label>
-            <input 
-                type="text"
-                matInput [matDatepicker]="picker"
-                class="form-control"
-                id="fechaDeReunion"
-                [(ngModel)]="reunion.fechaDeReunionFormateada"
-                name="fechaDeReunion"
-                required
-                placeholder="Seleccione fecha de Reunión"
-                #fechaDeReunion = "ngModel"
-                style="display: inline; width: 300px"
-                appFormatoFecha
-                >
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-        </div>
     </div>
 
-          <div class="form-group">
-        <div class="input-wrapper">
-      <label>Hora Inicio de Reunión</label>
-          <input 
-                 type="text"
-                 class="form-control" 
-                 id="horaReunion"
-                 [ngxTimepicker]="timepicker" 
-                 [(ngModel)]="reunion.horaReunion"
-                 name="horaReunion"
-                 [value]="'08:00'"  
-                 [format]="24" 
-                 style="display: inline; width: 300px; margin-right: 8px;" 
-                 readonly>
-          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
-          <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Nombre de Grupo:</label>
+        <input type="text" class="form-control" id="nombreGrupo" [(ngModel)]="reunion.nombreGrupo" name="nombreGrupo" required minlength="1" maxlength="40" placeholder="Digite el nombre del Grupo" #nombreGrupo="ngModel" readonly>
+        <div class="alert alert-danger" *ngIf="nombreGrupo.invalid && (nombreGrupo.dirty || nombreGrupo.touched)">
+          <div *ngIf="nombreGrupo.errors.required">Digite el nombre del grupo por favor</div>
+          <div *ngIf="nombreGrupo.errors.minlength">El nombre del grupo debe contener como mínimo 4 caracteres</div>
+          <div *ngIf="nombreGrupo.errors.maxlength">El nombre del grupo debe tener como máximo 10 caracteres</div>
+        </div>
       </div>
-  </div>
- 
+    </div>
 
-      <div class="form-group">
-    <div class="input-wrapper">
-  <label>Hora Cierre de Reunión</label>
-      <input 
-             type="text"
-             class="form-control" 
-             id="horaReunionCierre"
-             [ngxTimepicker]="timepickerCierre" 
-             [(ngModel)]="reunion.horaReunionCierre"
-             name="horaReunionCierre"
-             [value]="'08:00'"  
-             [format]="24" 
-             style="display: inline; width: 300px; margin-right: 8px;" 
-             readonly>
-      <ngx-material-timepicker #timepickerCierre></ngx-material-timepicker>
-      <mat-icon matSuffix style="cursor: pointer;" (click)="timepickerCierre.open()">access_time</mat-icon>
-  </div>
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Número de Cuenta Grupal:</label>
+        <input type="text" class="form-control" id="cuentaGrupo" [(ngModel)]="reunion.nroCuentaCliente" name="cuentaGrupo" required minlength="1" maxlength="40" placeholder="Digite el número de cuenta del Grupo" #cuentaGrupo="ngModel" readonly>
+        <div class="alert alert-danger" *ngIf="cuentaGrupo.invalid && (cuentaGrupo.dirty || cuentaGrupo.touched)">
+          <div *ngIf="cuentaGrupo.errors.required">Digite el número de cuenta del grupo por favor</div>
+          <div *ngIf="cuentaGrupo.errors.minlength">El número de cuenta del grupo debe contener como mínimo 4 caracteres</div>
+          <div *ngIf="cuentaGrupo.errors.maxlength">El número de cuenta del grupo debe tener como máximo 10 caracteres</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Asesor:</label>
+        <input type="text" class="form-control" id="asesor" [(ngModel)]="reunion.asesor" name="asesor" required minlength="1" maxlength="40" placeholder="Digite el nombre del asesor" #asesor="ngModel" readonly>
+        <div class="alert alert-danger" *ngIf="asesor.invalid && (asesor.dirty || asesor.touched)">
+          <div *ngIf="asesor.errors.required">Digite el asesor por favor</div>
+          <div *ngIf="asesor.errors.minlength">El asesor debe contener como mínimo 4 caracteres</div>
+          <div *ngIf="asesor.errors.maxlength">El asesor debe tener como máximo 10 caracteres</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>N° de Operación:</label>
+        <input type="text" class="form-control" id="idOperacion" [(ngModel)]="reunion.idOperacion" name="idOperacion" required minlength="1" maxlength="40" #idOperacion="ngModel" readonly>
+        <div class="alert alert-danger" *ngIf="idOperacion.invalid && (idOperacion.dirty || idOperacion.touched)">
+          <div *ngIf="idOperacion.errors.required">Digite el id de la operación por favor</div>
+          <div *ngIf="idOperacion.errors.minlength">El id de la operación debe contener como mínimo 4 caracteres</div>
+          <div *ngIf="idOperacion.errors.maxlength">El id de la operación debe tener como máximo 10 caracteres</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Fecha de Cierre:</label>
+        <input type="text" class="form-control" id="fechaCierre" [(ngModel)]="reunion.fechaCierreFormateada" name="fechaCierre" required minlength="1" maxlength="40" #fechaCierre="ngModel" readonly appFormatoFecha>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Fecha de Reunión:</label>
+        <input type="text" matInput [matDatepicker]="picker" class="form-control" id="fechaDeReunion" [(ngModel)]="reunion.fechaDeReunionFormateada" name="fechaDeReunion" required placeholder="Seleccione fecha de Reunión" #fechaDeReunion="ngModel" style="display: inline; width: 300px" appFormatoFecha>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Hora Inicio de Reunión:</label>
+        <input type="text" class="form-control" id="horaReunion" [ngxTimepicker]="timepicker" [(ngModel)]="reunion.horaReunion" name="horaReunion" [value]="'08:00'" [format]="24" style="display: inline; width: 300px; margin-right: 8px;" readonly>
+        <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+        <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Hora Cierre de Reunión:</label>
+        <input type="text" class="form-control" id="horaReunionCierre" [ngxTimepicker]="timepickerCierre" [(ngModel)]="reunion.horaReunionCierre" name="horaReunionCierre" [value]="'08:00'" [format]="24" style="display: inline; width: 300px; margin-right: 8px;" readonly>
+        <ngx-material-timepicker #timepickerCierre></ngx-material-timepicker>
+        <mat-icon matSuffix style="cursor: pointer;" (click)="timepickerCierre.open()">access_time</mat-icon>
+      </div>
+    </div>
+
+    <button class="btn btn-success" [disabled]="reunionForm.form.valid">Guardar</button>
+  </form>
 </div>
-
-  <!--<button class="btn btn-success" (click)="onSubmit()">Guardar</button>-->
-
-   <button class="btn btn-success" [disabled]= "reunionForm.form.valid">Guardar</button>
-    </form>
-  </div>
-  

@@ -15,6 +15,7 @@ export class ListaReunionesComponent implements OnInit{
   idOperacion:number;
   idReunion:number;
   reuniones:Reunion[];
+  reunion:Reunion = new Reunion();
 
   constructor(private route:ActivatedRoute,private reunionServicio:ReunionService,private router:Router) { }
 
@@ -39,13 +40,19 @@ export class ListaReunionesComponent implements OnInit{
    obtenerReunionesPorIdOperacion(idOperacion:number){
     this.reunionServicio.obtenerReunionPorIdOperacion(idOperacion).subscribe(dato => {
       this.reuniones = dato;
+      if(this.reuniones[0].horaReunion !==null){
+        console.log("Hora de Reuniones ya fue cargada y es:", this.reuniones[0].horaReunion);
+        this.mostrarBotonAgregarHora = false;
+      }
+
       console.log( "Por Id Operacion:",dato);
+      console.log( "Hora de Reuniones:",this.reuniones[0].horaReunion);
     });
   }
 
   getColorForConteo(conteoModificacion: number): string {
-    if (conteoModificacion > 1) {
-      return 'red'; // color rojo para conteo mayor que 1
+    if (conteoModificacion > 0) {
+      return 'red'; // color rojo para conteo mayor que 0
     }  else {
       return 'black'; // color negro para otros valores de conteo
     }
@@ -53,8 +60,8 @@ export class ListaReunionesComponent implements OnInit{
   
   
   getFontStyleForConteo(conteoModificacion: number): string {
-    // Devuelve 'italic' solo si el conteo es > 1
-    if (conteoModificacion > 1) {
+    // Devuelve 'italic' solo si el conteo es > 0
+    if (conteoModificacion > 0) {
       return 'italic';
     } else {
       return 'normal'; // Para otros estados, devuelve 'normal'
@@ -101,5 +108,50 @@ export class ListaReunionesComponent implements OnInit{
   modificarReunion(idReunion:number){
     this.router.navigate(['modificar-reunion',idReunion]);
   }
+
+
+// Nuevo Formulario
+  mostrarFormularioAgregarHora: boolean = false;
+  mostrarBotonAgregarHora: boolean = true;
+  nuevaReunion: any = {};
+
+  // Método para mostrar el formulario
+  mostrarFormulario() {
+    this.mostrarFormularioAgregarHora = true;
+  }
+
+  // Método para guardar la reunión y ocultar el formulario
+  guardarReunion_prueba() {
+    // Aquí colocas la lógica para guardar la nueva reunión
+    // Luego reseteas el formulario y ocultas el formulario
+    this.nuevaReunion = {};
+    this.mostrarFormularioAgregarHora = false;
+  }
+
+  guardarReunion(){
+    console.log("Datos de la reunion",this.reuniones);
+    this.reunionServicio.actualizarHoraReunion(this.reuniones[0].idOperacion,this.reunion).subscribe(dato => {
+      this.irAlaListaDeReuniones();
+    },error => console.log(error));
+    this.nuevaReunion = {};
+    this.mostrarFormularioAgregarHora = false;
+
+  }
+
+
+  irAlaListaDeReuniones(){
+    this.router.navigate(['/operaciones/reuniones/'+ this.reuniones[0].idOperacion]);
+    swal('Hora Registrada',`La Hora ha sido registrada con exito`,`success`);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  }
+
+  // Método para cancelar y ocultar el formulario
+  cancelar() {
+    this.nuevaReunion = {};
+    this.mostrarFormularioAgregarHora = false;
+  }  
+
 
 }
