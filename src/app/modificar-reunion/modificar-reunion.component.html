@@ -68,14 +68,24 @@
       </div>
     </div>
 
-    <div class="form-group">
+<!--     <div class="form-group">
       <div class="input-wrapper">
         <label>Fecha de Reunión:</label>
-        <input type="text" matInput [matDatepicker]="picker" class="form-control" id="fechaDeReunion" [(ngModel)]="reunion.fechaDeReunionFormateada" name="fechaDeReunion" required placeholder="Seleccione fecha de Reunión" #fechaDeReunion="ngModel" style="display: inline; width: 300px" appFormatoFecha>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+         <input type="text" matInput [matDatepicker]="picker" class="form-control" id="fechaDeReunion" [(ngModel)]="reunion.fechaDeReunionFormateada" name="fechaDeReunion" required placeholder="Seleccione fecha de Reunión" #fechaDeReunion="ngModel" style="display: inline; width: 300px" appFormatoFecha readonly>
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
     </div>
+-->
+
+<div class="form-group">
+  <div class="input-wrapper">
+      <label class="details-label">Fecha de Reunión:</label>
+      <div class="date-container">
+        <span class="details-value">{{ reunion.fechaDeReunion | date: 'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </div>
 
     <div class="form-group">
       <div class="input-wrapper">
@@ -85,7 +95,7 @@
         <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
       </div>
     </div>
-
+<!--
     <div class="form-group">
       <div class="input-wrapper">
         <label>Hora Cierre de Reunión:</label>
@@ -94,7 +104,19 @@
         <mat-icon matSuffix style="cursor: pointer;" (click)="timepickerCierre.open()">access_time</mat-icon>
       </div>
     </div>
-
-    <button class="btn btn-success" [disabled]="reunionForm.form.valid">Guardar</button>
+-->
+    <div class="form-group">
+      <div class="input-wrapper">
+        <label>Motivo de Modificación:</label>
+        <input type="text" class="form-control wider-input" id="motivoModificacion" [(ngModel)]="reunion.motivoModificacion" name="motivoModificacion" required minlength="1" maxlength="100" placeholder="Escriba el motivo de la modificación de la Reunión" #motivoModificacion="ngModel">
+        <div class="alert alert-danger" *ngIf="motivoModificacion.invalid && (motivoModificacion.dirty || motivoModificacion.touched)">
+          <div *ngIf="motivoModificacion.errors.required">Escriba el motivo de la modificación de la Reunión</div>
+          <div *ngIf="motivoModificacion.errors.minlength">El motivo debe contener como mínimo 4 caracteres</div>
+          <div *ngIf="motivoModificacion.errors.maxlength">El motivo debe tener como máximo 100 caracteres</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-danger" type="button" (click)="cancelar()" style="margin-right: 10px;">Cancelar</button>
+    <button class="btn btn-success" [disabled]="motivoModificacion.invalid || motivoModificacion.pristine">Guardar</button>
   </form>
 </div>

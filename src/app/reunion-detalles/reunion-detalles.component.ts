@@ -10,7 +10,7 @@ import { formatDate } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reunion-detalles',
@@ -23,7 +23,7 @@ export class ReunionDetallesComponent implements OnInit{
   
   idReunion:number;
   reunion:Reunion;
-  constructor(private datePipe: DatePipe, private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
+  constructor(private location: Location, private datePipe: DatePipe, private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
 
 
   ngOnInit(): void {
@@ -33,6 +33,10 @@ export class ReunionDetallesComponent implements OnInit{
       this.reunion = dato;
       //swal(`Detalles de la Reunión N° <strong>${this.reunion.idReunion}</strong>`);
     });
+  }
+
+  cancelar(): void {
+    this.location.back();
   }
 
 }

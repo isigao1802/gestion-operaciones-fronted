@@ -19,4 +19,5 @@ export class Reunion {
     fechaCierreFormateada:Date;
     estado:String;
     conteoModificacion:number;
+    motivoModificacion:String;
 }

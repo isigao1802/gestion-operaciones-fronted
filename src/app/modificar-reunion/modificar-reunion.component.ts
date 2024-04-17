@@ -5,6 +5,7 @@ import { ReunionService } from '../reunion.service';
 import  swal  from 'sweetalert2';
 import { FormatoFechaDirective } from '../directives/formato-fecha.directive';
 import { DatePipe, formatDate } from '@angular/common';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ModificarReunionComponent implements OnInit{
   reuniones:Reunion[];
   idReunion:number;
   reunion:Reunion = new Reunion();
-  constructor(private datePipe: DatePipe,private reunionService:ReunionService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private location: Location, private datePipe: DatePipe,private reunionService:ReunionService,private router:Router,private route:ActivatedRoute) {}
 
 
   
@@ -40,6 +41,9 @@ export class ModificarReunionComponent implements OnInit{
     });
   }
 
+  cancelar(): void {
+    this.location.back();
+  }
   onSubmit(){
     this.reunionService.actualizarReunion(this.idReunion,this.reunion).subscribe(dato => {
       //this.irAlaListaDeReuniones();operaciones/reuniones/:idOperacion

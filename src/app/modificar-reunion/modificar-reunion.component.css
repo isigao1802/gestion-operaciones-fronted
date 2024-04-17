@@ -17,3 +17,23 @@
 .input-wrapper input {
     flex: 1; /* Hace que el input ocupe todo el espacio disponible */
 }
+
+.date-container {
+    background-color: #eeeeeeee; /* Color de fondo gris */
+    border-radius: 5px; /* Bordes redondeados */
+    width: 350px;
+    display: inline-block;
+    text-align: left;
+    margin-right: 10px;
+    padding: 9px;
+  }
+  
+  .details-value {
+    font-size: 16px; /* Tamaño de letra */
+    margin-left: 10px;
+  }
+  
+  .wider-input {
+    width: 250px; /* Ancho deseado */
+    height: 60px; /* Alto deseado */
+  }
