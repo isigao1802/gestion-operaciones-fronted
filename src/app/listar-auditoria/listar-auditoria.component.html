@@ -1,0 +1,39 @@
+<!-- tu-componente.component.html -->
+
+<h2>Auditoria de Modificaciones realizadas</h2>
+
+<div class="caja-input">
+  <input type="text" id="filtrarAuditoriaPorGrupo" [(ngModel)]="grupoFiltro" placeholder="Buscar por Grupo..">
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th style="text-align: center;">Acción Realizada</th>
+      <th style="text-align: center;">Fecha Modificación</th>
+      <th style="text-align: center;">Hora Modificación</th>
+      <th style="text-align: center;">Grupo</th>
+      <th style="text-align: center;">Motivo</th>
+      <th style="text-align: center;">Nro Operación</th>
+      <th style="text-align: center;">Nro Reunión</th>
+      <th style="text-align: center;">Nro usuario</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let auditoria of filtrarAuditoriaPorGrupo()">
+      <td>{{auditoria.accionRealizada}}</td>
+      <td style="text-align: center;">{{auditoria.fecha}}</td>
+      <td style="text-align: center;">{{auditoria.hora}}</td>
+      <td>{{auditoria.grupo}}</td>
+      <td>{{auditoria.motivoModificacion}}</td>
+      <td style="text-align: center;">{{auditoria.nroOperacion}}</td>
+      <td style="text-align: center;">{{auditoria.nroReunion}}</td>
+      <td>{{auditoria.usuario}}</td>
+      <!--  <td>
+      <div class="d-inline-block">
+            <button class="btn btn-danger" type="button" (click)="cancelar()" style="margin-right: 10px;">Atrás</button>
+        </div>  
+      </td>   -->   
+    </tr>
+  </tbody>
+</table>

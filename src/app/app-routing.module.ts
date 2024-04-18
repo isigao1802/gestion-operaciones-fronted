@@ -9,8 +9,10 @@ import { ListaReunionesComponent } from './lista-reuniones/lista-reuniones.compo
 import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
 import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
 import { ListarTareasComponent } from './listar-tareas/listar-tareas.component';
+import { ListarAuditoriaComponent } from './listar-auditoria/listar-auditoria.component';
 
 const routes: Routes = [
+  { path: 'auditorias', component: ListarAuditoriaComponent },
   { path: 'operaciones', component: ListaOperacionesComponent },
   {path : 'modificar-reunion/:idReunion',component : ModificarReunionComponent},
   { path: 'reuniones', component: ListaReunionesComponent },
@@ -23,7 +25,8 @@ const routes: Routes = [
   { path: 'operaciones/reuniones/:idReunion/:idOperacion/listar-tareas', component: ListarTareasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'operaciones', pathMatch: 'full' }, 
+  { path: '**', redirectTo: 'auditorias', pathMatch: 'full' }, 
+  
 ];
 
 @NgModule({

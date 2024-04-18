@@ -28,6 +28,7 @@ import { FormatoFechaDirective } from './directives/formato-fecha.directive';
 import { AuthService } from './auth.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
+import { ListarAuditoriaComponent } from './listar-auditoria/listar-auditoria.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -43,7 +44,8 @@ registerLocaleData(localeEs, 'es');
     FormatoFechaDirective,
     ListarTareasComponent, 
     CalendarioComponent,
-    ReunionDetallesComponent
+    ReunionDetallesComponent, 
+    ListarAuditoriaComponent
     
   ],
   imports: [
