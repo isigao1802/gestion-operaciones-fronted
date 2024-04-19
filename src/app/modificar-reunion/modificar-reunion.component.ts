@@ -25,6 +25,7 @@ export class ModificarReunionComponent implements OnInit{
     this.idReunion = this.route.snapshot.params['idReunion'];
     this.reunionService.obtenerReunionPorId(this.idReunion).subscribe(dato =>{
       this.reunion = dato;
+      this.reunion.itemModificado='Hora';
     },error => console.log(error));
   }
 

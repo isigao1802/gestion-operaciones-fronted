@@ -1,5 +1,5 @@
 <div class="col-md-6 offset-md-3">
-  <h2 class="text-center">Actualizar Reunión</h2>
+  <h2 class="text-center">Modificar Reunión</h2>
   <form (ngSubmit)="onSubmit()" #reunionForm="ngForm">
     <div class="form-group">
       <label>N° Reunión:</label>
@@ -105,6 +105,22 @@
       </div>
     </div>
 -->
+
+<div class="form-group">
+  <div class="input-wrapper">
+    <label for="nombreGrupo">Item a Modificar:</label>
+    <select class="form-control wider-input" id="itemModificado" [(ngModel)]="reunion.itemModificado" name="itemModificado" required #itemModificado="ngModel" readonly>
+      <option value="Hora">Hora</option>
+      <option value="Fecha">Fecha</option>
+      <!-- Agrega más opciones según sea necesario -->
+    </select>
+    <div class="alert alert-danger" *ngIf="itemModificado.invalid && (itemModificado.dirty || itemModificado.touched)">
+      <div *ngIf="itemModificado.errors.required">Seleccione una opción</div>
+    </div>
+  </div>
+</div>
+
+
     <div class="form-group">
       <div class="input-wrapper">
         <label>Motivo de Modificación:</label>

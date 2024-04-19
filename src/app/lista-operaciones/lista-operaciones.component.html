@@ -1,10 +1,9 @@
 <!-- tu-componente.component.html -->
 
-<h2>Lista Operaciones</h2>
+<h2>Listado de Operaciones</h2>
 
-<div>
-  <label for="filtrarOperacionesPorAsesor">Filtrar por Asesor:</label>
-  <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro">
+<div class="caja-input">
+  <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro" placeholder="Buscar por Asesor..">
 </div>
 
 <table class="table table-striped">

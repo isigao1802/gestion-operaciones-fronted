@@ -20,4 +20,5 @@ export class Reunion {
     estado:String;
     conteoModificacion:number;
     motivoModificacion:String;
+    itemModificado:String;
 }

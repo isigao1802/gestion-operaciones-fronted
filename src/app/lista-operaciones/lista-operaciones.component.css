@@ -1,0 +1,17 @@
+.caja-input {
+    width: 300px; /* Ancho deseado */
+    height: 40px; /* Alto deseado */
+    border: 2px solid blue; /* Borde de color azul */
+    border-radius: 10px; /* Bordes redondeados */
+    display: flex; /* Usar flexbox para centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+    padding: 5px; /* Espaciado interno */
+  }
+  
+  input[type="text"] {
+    width: calc(100% - 12px); /* Restar el ancho del borde y el relleno */
+    height: calc(100% - 12px); /* Restar el alto del borde y el relleno */
+    border: none; /* Quitar el borde del input */
+    outline: none; /* Quitar el contorno de enfoque */
+    padding: 5px; /* Espaciado interno */
+  }

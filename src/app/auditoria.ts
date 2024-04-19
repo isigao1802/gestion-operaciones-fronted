@@ -11,6 +11,6 @@ export class Auditoria {
     fechaHoraModificacion:string;
     fecha:string;
     hora:string;
-    
+    itemModificado:string;
   }
   
