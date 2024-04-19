@@ -40,13 +40,13 @@ export class ListaReunionesComponent implements OnInit{
    obtenerReunionesPorIdOperacion(idOperacion:number){
     this.reunionServicio.obtenerReunionPorIdOperacion(idOperacion).subscribe(dato => {
       this.reuniones = dato;
-      if(this.reuniones[0].horaReunion !==null){
-        console.log("Hora de Reuniones ya fue cargada y es:", this.reuniones[0].horaReunion);
+      if(this.reuniones[0].horaReunionAgendada !==null){
+        console.log("Hora de Reuniones ya fue cargada y es:", this.reuniones[0].horaReunionAgendada);
         this.mostrarBotonAgregarHora = false;
       }
 
       console.log( "Por Id Operacion:",dato);
-      console.log( "Hora de Reuniones:",this.reuniones[0].horaReunion);
+      console.log( "Hora de Reuniones:",this.reuniones[0].horaReunionAgendada);
     });
   }
 

@@ -30,8 +30,8 @@
       <span class="details-value">{{ reunion.fechaDeReunion | date: 'dd/MM/yyyy' }}</span>
     </div> 
     <div class="details-item">
-      <label class="details-label">Hora de Reunión:</label>
-      <span class="details-value">{{ reunion.horaReunion }}</span>
+      <label class="details-label">Hora de Reunión Agendada:</label>
+      <span class="details-value">{{ reunion.horaReunionAgendada }}</span>
     </div>
     <div class="details-item">
       <label class="details-label">Fecha de Cierre de la Operación:</label>
@@ -40,6 +40,19 @@
     <div class="details-item">
       <label class="details-label">Estado de la Reunión: </label>
       <span class="details-value">{{ reunion.estado }}</span>
+    </div>
+
+    <div class="details-item" *ngIf="reunion.estado === 'CERRADA'">
+      <label class="details-label">Duración: </label>
+      <span class="details-value">{{ reunion.duracion }} minutos</span>
+    </div>
+    <div class="details-item" *ngIf="reunion.estado === 'CERRADA'">
+      <label class="details-label">Hora de Inicio: </label>
+      <span class="details-value">{{ reunion.horaReunionComienzo }}</span>
+    </div>
+    <div class="details-item" *ngIf="reunion.estado === 'CERRADA'">
+      <label class="details-label">Hora de Termino: </label>
+      <span class="details-value">{{ reunion.horaReunionCierre }}</span>
     </div>
     <button class="btn btn-danger" type="button" (click)="cancelar()" style="margin-right: 10px;">Atrás</button>
   </div>

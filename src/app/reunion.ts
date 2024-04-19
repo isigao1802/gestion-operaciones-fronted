@@ -9,7 +9,7 @@ export class Reunion {
     interes_interno :number;
     nroCuentaCliente:number;
     prestamo_interno:number;
-    horaReunion:string;
+    horaReunionAgendada:string;
     horaReunionCierre:string;
     frecuencia:number;
     asesor:string;
@@ -21,4 +21,6 @@ export class Reunion {
     conteoModificacion:number;
     motivoModificacion:String;
     itemModificado:String;
+    duracion:number;
+    horaReunionComienzo:string;
 }

@@ -90,7 +90,7 @@
     <div class="form-group">
       <div class="input-wrapper">
         <label>Hora Inicio de Reunión:</label>
-        <input type="text" class="form-control" id="horaReunion" [ngxTimepicker]="timepicker" [(ngModel)]="reunion.horaReunion" name="horaReunion" [value]="'08:00'" [format]="24" style="display: inline; width: 300px; margin-right: 8px;" readonly>
+        <input type="text" class="form-control" id="horaReunionAgendada" [ngxTimepicker]="timepicker" [(ngModel)]="reunion.horaReunionAgendada" name="horaReunionAgendada" [value]="'08:00'" [format]="24" style="display: inline; width: 300px; margin-right: 8px;" readonly>
         <ngx-material-timepicker #timepicker></ngx-material-timepicker>
         <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
       </div>
