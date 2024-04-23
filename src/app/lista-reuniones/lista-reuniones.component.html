@@ -21,6 +21,19 @@
           <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
         </div>
       </div>
+      <div class="form-group">
+        <div class="input-wrapper">
+          <label class="label-prestamo" for="conPrestamoInterno" style="display: inline-block; width: 210px;">Tiene Préstamo Interno: </label>
+          <select class="form-control" style="text-align: center;" id="conPrestamoInterno" [(ngModel)]="reunion.conPrestamoInterno" name="conPrestamoInterno" required #conPrestamoInterno="ngModel" style="display: inline-block; width: 100px;" readonly>
+            <option value="SI" style="text-align: center;">SI</option>
+            <option value="NO" style="text-align: center;">NO</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="conPrestamoInterno.invalid && (conPrestamoInterno.dirty || conPrestamoInterno.touched)">
+            <div *ngIf="conPrestamoInterno.errors.required">Seleccione una opción</div>
+          </div>
+        </div>
+      </div>
+      
       <button class="btn btn-success" style="margin-right: 10px;">Registrar Horario</button>
       <button (click)="cancelar()" class="btn btn-danger">Cancelar</button>
     </form>

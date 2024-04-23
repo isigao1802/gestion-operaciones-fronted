@@ -23,4 +23,6 @@ export class Reunion {
     itemModificado:String;
     duracion:number;
     horaReunionComienzo:string;
+    conPrestamoInterno:string;
+    duracionEstimada:number;
 }

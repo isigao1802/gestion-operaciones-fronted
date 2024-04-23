@@ -7,6 +7,10 @@
     margin-right: 8px; /* Ajusta el margen según tus necesidades */
   }
 
+  .label-prestamo {
+    margin-right: 2px; /* Ajusta el margen según tus necesidades */
+  }
+
   .input-hora {
     width: 150px; /* Ajusta el ancho según tus necesidades */
   }
@@ -19,3 +23,25 @@
     width: 150px; /* Ajusta el ancho según tus necesidades */
     margin: 0 auto; /* Establece margen automático a izquierda y derecha para centrar */
   }
+
+  /* Ajusta la posición del checkbox */
+.custom-checkbox .mat-checkbox-layout {
+  margin-left: 10px; /* Ajusta el valor según sea necesario */
+}
+
+/* Ajusta el tamaño del cuadro del checkbox */
+.custom-checkbox .mat-checkbox-inner-container {
+  width: 24px; /* Ajusta el tamaño del cuadro del checkbox según sea necesario */
+  height: 24px; /* Ajusta el tamaño del cuadro del checkbox según sea necesario */
+}
+
+/* Ajusta la posición del checkbox */
+.input-wrapper input[type="checkbox"] {
+  margin-left: 10px; /* Ajusta el valor según sea necesario */
+}
+
+/* Ajusta el tamaño del cuadro del checkbox */
+.input-wrapper input[type="checkbox"] {
+  width: 24px; /* Ajusta el tamaño del cuadro del checkbox según sea necesario */
+  height: 24px; /* Ajusta el tamaño del cuadro del checkbox según sea necesario */
+}

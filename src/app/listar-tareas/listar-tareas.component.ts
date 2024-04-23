@@ -57,10 +57,31 @@ export class ListarTareasComponent implements OnInit{
   }
 
 
+  botonCerrarReunion(){
+    this.calcularTiempoTranscurrido()
+    swal({
+      title: 'Han pasado ' + this.tiempoTranscurrido + ' minutos ' + ' ¿Estás seguro que desea cerrar la reunión?',
+      text: "Confirma si deseas cerrar la reunión",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si , cerrarlo',
+      cancelButtonText: 'No, cancelar',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: true
+    }).then((result) => {
+      if(result.value){
+        this.cerrarReunion();
+      }
+    })
+  }
+
+
   cerrarReunion() {
     // Verificar si todos los items están marcados
     if (this.todosLosItemsMarcados()) {
-      this.calcularTiempoTranscurrido();
       console.log("Reunión cerrada correctamente.");
       swal(`Se ha cerrado la reunión exitosamente`,'', 'success');
       this.reunion.duracion=this.tiempoTranscurrido;
@@ -70,6 +91,11 @@ export class ListarTareasComponent implements OnInit{
       this.reunionService.actualizarReunion(this.idReunion,this.reunion).subscribe(dato => {
         console.log("Id Operación: ",this.idOperacion);
         this.obtenerReunionesPorIdOperacion(this.idOperacion); 
+        swal(
+          'Reunión Cerrada',
+          'La reunión ha sido cerrada con éxito',
+          'success'
+        )
       },error => console.log(error));
     } else {
       // Si no todos los items están marcados, muestra un mensaje de error o realiza otra acción según sea necesario

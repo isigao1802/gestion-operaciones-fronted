@@ -17,12 +17,13 @@ export class ListaReunionesComponent implements OnInit{
   reuniones:Reunion[];
   reunion:Reunion = new Reunion();
 
+  
   constructor(private route:ActivatedRoute,private reunionServicio:ReunionService,private router:Router) { }
 
   ngOnInit(): void {
     this.idOperacion = this.route.snapshot.params['idOperacion'];
     this.obtenerReunionesPorIdOperacion(this.idOperacion)
-    
+    this.reunion.conPrestamoInterno='NO';
    
   }
 
@@ -129,7 +130,7 @@ export class ListaReunionesComponent implements OnInit{
   }
 
   guardarReunion(){
-    console.log("Datos de la reunion",this.reuniones);
+    console.log("Datos de la reunion",this.reuniones[0]);
     this.reunionServicio.actualizarHoraReunion(this.reuniones[0].idOperacion,this.reunion).subscribe(dato => {
       this.irAlaListaDeReuniones();
     },error => console.log(error));
