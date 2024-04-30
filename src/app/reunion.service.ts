@@ -3,15 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reunion } from './reunion';
 import { tap, catchError, map } from 'rxjs/operators';
-
+import { environment } from '../environments/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReunionService {
 
-  //Esta URL obtiene el listado de todas las reuniones en el backend
-  private baseURL = "http://localhost:8080/reuniones";
+  private URLPrincipal = environment.urlBase;
+  private baseURL = this.URLPrincipal + "/reuniones";
   private lista_reuniones = "buscarReuniones";
   private porIdOperacion = "obtenerPorIdOperacion";
   private updateHora = "updateHora";

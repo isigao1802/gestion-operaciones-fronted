@@ -13,6 +13,7 @@ import multiMonthPlugin from '@fullcalendar/multimonth';
 import { EventoService } from '../evento.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { environment } from '../../environments/config';
 
 @Component({
   selector: 'app-calendario',
@@ -21,6 +22,10 @@ import { Subscription } from 'rxjs';
 })
 
 export class CalendarioComponent implements OnInit {
+
+  private URLPrincipal = environment.urlBase;
+  
+
   searchTitle: string = '';
   asesorFiltro: string = '';
   eventos: any[] = [];
@@ -63,7 +68,7 @@ export class CalendarioComponent implements OnInit {
     eventsSet: this.handleEvents.bind(this),
     eventSources: [
       {
-        url: 'http://localhost:8080/eventos/buscarPorUde',
+        url: this.URLPrincipal +'/eventos/buscarPorUde',
         extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
         success: this.handleSuccess.bind(this)
       }
@@ -158,7 +163,7 @@ actualizarEventosEnCalendario() {
       initialEvents: updatedEvents,
           eventSources: [
       {
-        url: 'http://localhost:8080/eventos/buscarPorUde',
+        url: this.URLPrincipal +'/eventos/buscarPorUde',
         extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
         success: this.handleSuccess.bind(this)
       }

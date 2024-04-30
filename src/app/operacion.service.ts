@@ -4,14 +4,15 @@ import { Observable } from 'rxjs';
 import { Operacion } from './operacion';
 import { ReunionService } from './reunion.service';
 import { tap, catchError, map } from 'rxjs/operators';
+import { environment } from '../environments/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperacionService {
 
-  //Esta URL obtiene el listado de todos las operaciones en el backend
-  private baseURL = "http://localhost:8080/operaciones";
+  private URLPrincipal = environment.urlBase;
+  private baseURL = this.URLPrincipal + "/operaciones";
   private lista_operaciones = "buscarOperaciones";
 
   constructor(private httpClient : HttpClient, private reunionService:ReunionService) { }

@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { Auditoria } from './auditoria';
 import { ReunionService } from './reunion.service';
 import { tap, catchError, map } from 'rxjs/operators';
+import { environment } from '../environments/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuditoriaService {
-
-  //Esta URL obtiene el listado de todos las auditorias en el backend
-  private baseURL = "http://localhost:8080/auditorias";
+  private URLPrincipal = environment.urlBase;
+  private baseURL = this.URLPrincipal + "/auditorias"
   private lista_auditorias = "buscarAuditorias";
 
   constructor(private httpClient : HttpClient, private reunionService:ReunionService) { }
