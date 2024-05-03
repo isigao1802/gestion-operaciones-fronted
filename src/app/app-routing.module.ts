@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'operaciones/reuniones/:idReunion/:idOperacion/listar-tareas', component: ListarTareasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auditorias', pathMatch: 'full' }, 
+  { path: '**', redirectTo: 'operaciones', pathMatch: 'full' }, 
   
 ];
 

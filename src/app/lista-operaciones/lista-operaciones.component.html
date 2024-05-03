@@ -1,35 +1,55 @@
-<!-- tu-componente.component.html -->
 
 <h2>Listado de Operaciones</h2>
 
-<div class="caja-input">
-  <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro" placeholder="Buscar por Asesor..">
-</div>
+<div class="d-flex align-items-center">
+  <div class="caja-input">
+    <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro" placeholder="Buscar por Asesor..">
+  </div>
 
-<table class="table table-striped">
-  <thead class="table-dark">
-    <tr>
-      <th>N° Operación</th>
-      <th>Nro Cuenta Cliente</th>
-      <th>Nombre de Cliente</th>
-      <th>Asesor</th>
-      <th>Fecha de Desembolso</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let operacion of filtrarOperacionesPorAsesor()">
-      <td style="text-align: center;">{{operacion.id_operacion}}</td>
-      <td>{{operacion.nro_cuenta_cliente}}</td>
-      <td>{{operacion.nombre_grupo}}</td>
-      <td>{{operacion.asesor}}</td>
-      <td>{{operacion.fecha_desembolso | date:'dd/MM/yyyy'}}</td>
-      <td>
-        <div class="d-inline-block">
-          <button (click)="verDetallesDelaOperacion(operacion.id_operacion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
-          <button (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)" class="btn btn-primary">Lista de Reuniones</button>
-        </div>
-      </td>      
-    </tr>
-  </tbody>
-</table>
+  <div>
+    <select [(ngModel)]="sucursalFiltro" class="select-caja">
+      <option value="CASA MATRIZ">CASA MATRIZ</option>
+      <option value="SUCURSAL ÑEMBY">SUCURSAL ÑEMBY</option>
+      <option value="SUCURSAL RUTA 1">SUCURSAL RUTA 1</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <p *ngIf="totalRegistrosFiltrados > 0" class="mb-3">Se encontraron <strong>{{ totalRegistrosFiltrados }}</strong> registros.</p>
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th style="text-align: center;">N° Operación</th>
+            <th>Nro Cuenta Grupo</th>
+            <th>Nombre de Grupo</th>
+            <th>Sucursal</th>
+            <th>Asesor</th>
+            <th>Fecha de Desembolso</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let operacion of filtrarOperaciones(); let i = index">
+            <td>{{ i + 1 }}</td>
+            <td style="text-align: center;">{{ operacion.id_operacion }}</td>
+            <td>{{ operacion.nro_cuenta_cliente }}</td>
+            <td>{{ operacion.nombre_grupo }}</td>
+            <td>{{ operacion.sucursal }}</td>
+            <td>{{ operacion.asesor }}</td>
+            <td>{{ operacion.fecha_desembolso | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary" (click)="verDetallesDelaOperacion(operacion.id_operacion)">Ver Detalles</button>
+                <button type="button" class="btn btn-primary" (click)="obtenerReunionesPorIdOperacion(operacion.id_operacion)">Lista de Reuniones</button>
+              </div>
+            </td>      
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Operacion } from '../operacion';
 import { ReunionService } from '../reunion.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-operacion-detalles',
@@ -14,7 +15,7 @@ export class OperacionDetallesComponent implements OnInit {
 
   nroCuenta:number;
   operacion:Operacion;
-  constructor(private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
+  constructor(private location: Location, private route:ActivatedRoute,private operacionServicio:OperacionService, private reunionService:ReunionService) { }
 
   ngOnInit(): void {
     this.nroCuenta = this.route.snapshot.params['nroCuenta'];
@@ -23,6 +24,10 @@ export class OperacionDetallesComponent implements OnInit {
       this.operacion = dato;
       //swal(`Detalles de la Operación ${this.operacion.nro_cuenta_cliente}`);
     });
+  }
+
+  cancelar(): void {
+    this.location.back();
   }
 
 }

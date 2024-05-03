@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { filter, map  } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-operaciones',
@@ -16,13 +18,16 @@ export class ListaOperacionesComponent implements OnInit {
   operaciones:Operacion[];
   reuniones:Reunion[];
   asesorFiltro: string = '';
+  sucursalFiltro: string = 'CASA MATRIZ'; 
+  totalRegistrosFiltrados: number = 0;
 
   constructor(private operacionServicio:OperacionService,private router:Router, private reunionServicio:ReunionService) { }
 
+  
   ngOnInit(): void {
-    //this.obtenerOperaciones();
     this.obtenerOperacionesPorTipos([901, 903, 905]);
   }
+
 
 
   filtrarOperacionesPorAsesor(): Operacion[] {
@@ -31,6 +36,29 @@ export class ListaOperacionesComponent implements OnInit {
     }
     return this.operaciones.filter(operacion => operacion.asesor.toString().includes(this.asesorFiltro));
   }
+
+
+  filtrarOperacionesPorSucursal(): Operacion[] {
+    if (!this.sucursalFiltro) {
+      return this.operaciones; // Si no hay filtro, devuelve todas las operaciones
+    }
+    return this.operaciones.filter(operacion => operacion.sucursal.toString().includes(this.sucursalFiltro));
+  }
+
+
+
+  filtrarOperaciones() {
+    const operacionesFiltradas = this.operaciones.filter(operacion => {
+      const filtroAsesor = !this.asesorFiltro || operacion.asesor.toLowerCase().includes(this.asesorFiltro.toLowerCase());
+      const filtroSucursal = !this.sucursalFiltro || operacion.sucursal === this.sucursalFiltro;
+      return filtroAsesor && filtroSucursal;
+    });
+
+    this.totalRegistrosFiltrados = operacionesFiltradas.length; 
+    return operacionesFiltradas;
+  }
+
+
 
   redirectToReuniones() {
     this.router.navigate(['/reuniones']);

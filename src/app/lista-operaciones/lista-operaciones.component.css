@@ -15,3 +15,16 @@
     outline: none; /* Quitar el contorno de enfoque */
     padding: 5px; /* Espaciado interno */
   }
+
+  .texto-centrado {
+    display: block;
+    text-align: center;
+  }
+  
+  .select-caja {
+    border: 2px solid blue;
+    font-size: 16px;
+    height: 40px; /* Ajusta la altura según sea necesario */
+    width: 100%; /* Opcional: ajusta el ancho del select al 100% */
+    border-radius: 10px;
+  }

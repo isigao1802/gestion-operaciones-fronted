@@ -14,11 +14,11 @@
       <span class="details-value">{{ operacion.tipo_operacion }}</span>
     </div>
     <div class="details-item">
-      <label class="details-label">Nro de Cuenta Cliente :</label>
+      <label class="details-label">Nro de Cuenta Grupo :</label>
       <span class="details-value">{{ operacion.nro_cuenta_cliente.toLocaleString('es-ES') }}</span>
     </div>
     <div class="details-item">
-      <label class="details-label">Nombre Cliente :</label>
+      <label class="details-label">Nombre Grupo :</label>
       <span class="details-value">{{ operacion.nombre_grupo }}</span>
     </div>
     <div class="details-item">
@@ -101,6 +101,7 @@
       <label class="details-label">Calificación:</label>
       <span class="details-value">{{ operacion.calificacion }}</span>
     </div>
+    <button class="btn btn-danger" type="button" (click)="cancelar()" style="margin-right: 10px;">Atrás</button>
   </div>
 </body>
 </html>
