@@ -18,6 +18,8 @@ export class ListarAuditoriaComponent implements OnInit {
   auditorias:Auditoria[];
   reuniones:Reunion[];
   grupoFiltro: string = '';
+  sucursalFiltro: string = 'CASA MATRIZ'; 
+  totalRegistrosFiltrados: number = 0;
 
   constructor(private location: Location,private auditoriaServicio:AuditoriaService,private router:Router, private reunionServicio:ReunionService) { }
 
@@ -36,6 +38,17 @@ export class ListarAuditoriaComponent implements OnInit {
       return this.auditorias; // Si no hay filtro, devuelve todas las auditorias
     }
     return this.auditorias.filter(auditoria => auditoria.grupo.toString().includes(this.grupoFiltro));
+  }
+
+  filtrarAuditorias() {
+    const auditoriasFiltradas = this.auditorias.filter(auditoria => {
+      const filtroGrupo = !this.grupoFiltro || auditoria.grupo.toLowerCase().includes(this.grupoFiltro.toLowerCase());
+      const filtroSucursal = !this.sucursalFiltro || auditoria.sucursal === this.sucursalFiltro;
+      return filtroGrupo && filtroSucursal;
+    });
+
+    this.totalRegistrosFiltrados = auditoriasFiltradas.length; 
+    return auditoriasFiltradas;
   }
 
   redirectToReuniones() {

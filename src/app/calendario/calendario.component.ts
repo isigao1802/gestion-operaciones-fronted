@@ -89,6 +89,7 @@ matchSearchCriteria(arg: any): boolean {
     const url = (this.calendarOptions() as any).eventSources[0].url;
     const extraParams = (this.calendarOptions() as any).eventSources[0].extraParams;
     console.log('Extra Params:', extraParams);
+    this.totalRegistrosFiltrados = response.length; 
   }
 
   currentEvents = signal<EventApi[]>([]);
@@ -99,11 +100,7 @@ matchSearchCriteria(arg: any): boolean {
 
   
   ngOnInit() {
-    this.calendarVisible.set(true);
-    console.log('Calendario:', this.calendarVisible);
-    this.totalRegistrosFiltrados=this.eventos.length;
-    //this.buscar();
-  
+    this.calendarVisible.set(true);  
   }
 
   ngOnDestroy() {
@@ -120,6 +117,7 @@ matchSearchCriteria(arg: any): boolean {
         this.eventos = data;
         console.log('Eventos traidos con el filtro: ', this.eventos);
         this.totalRegistrosFiltrados = this.eventos.length; 
+        console.log('Total de Registros ', this.totalRegistrosFiltrados);
         this.actualizarEventosEnCalendario();
        
       },
@@ -154,6 +152,8 @@ matchSearchCriteria(arg: any): boolean {
   
 actualizarEventosEnCalendario() {
   this.calendarOptions.update(options => {
+    this.totalRegistrosFiltrados = this.eventos.length; 
+    console.log('Total de Registros ', this.totalRegistrosFiltrados);
     const updatedEvents = this.eventos.map(evento => {
       if (evento.startDay && evento.endDay) {
         const formattedStart = this.formatToISOWithOffset(evento.startStr);
@@ -170,7 +170,8 @@ actualizarEventosEnCalendario() {
       }
     }).filter(evento => evento !== null);
     console.log('Eventos actualizados:', updatedEvents);
-    
+    this.totalRegistrosFiltrados = this.eventos.length; 
+    console.log('Total de Registros ', this.totalRegistrosFiltrados);
     return {
       ...options,
       initialEvents: updatedEvents,

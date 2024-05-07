@@ -2,16 +2,31 @@
 
 <h2>Auditoria de Modificaciones Realizadas</h2>
 
+<div class="d-flex align-items-center">
 <div class="caja-input">
   <input type="text" id="filtrarAuditoriaPorGrupo" [(ngModel)]="grupoFiltro" placeholder="Buscar por Grupo..">
 </div>
 
-<table class="table table-striped">
+<div>
+  <select [(ngModel)]="sucursalFiltro" class="select-caja">
+    <option value="CASA MATRIZ">CASA MATRIZ</option>
+    <option value="SUCURSAL ÑEMBY">SUCURSAL ÑEMBY</option>
+    <option value="SUCURSAL RUTA 1">SUCURSAL RUTA 1</option>
+  </select>
+</div>
+</div>
+<div class="row">
+  <div class="col">
+    <p *ngIf="totalRegistrosFiltrados > 0" class="mb-3">Se encontraron <strong>{{ totalRegistrosFiltrados }}</strong> registros.</p>  
+    <div class="table-responsive">
+    <table class="table table-striped">
   <thead class="table-dark">
     <tr>
+      <th>#</th>
       <th style="text-align: center;">Acción Realizada</th>
       <th style="text-align: center;">Fecha Modificación</th>
       <th style="text-align: center;">Hora Modificación</th>
+      <th style="text-align: center;">Sucursal</th>
       <th style="text-align: center;">Grupo</th>
       <th style="text-align: center;">Motivo</th>
       <th style="text-align: center;">Nro Operación</th>
@@ -20,10 +35,12 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let auditoria of filtrarAuditoriaPorGrupo()">
+    <tr *ngFor="let auditoria of filtrarAuditorias(); let i = index">
+      <td>{{ i + 1 }}</td>
       <td>{{auditoria.accionRealizada}}</td>
       <td style="text-align: center;">{{auditoria.fecha}}</td>
       <td style="text-align: center;">{{auditoria.hora}}</td>
+      <td>{{auditoria.sucursal}}</td>
       <td>{{auditoria.grupo}}</td>
       <td>{{auditoria.motivoModificacion}}</td>
       <td style="text-align: center;">{{auditoria.nroOperacion}}</td>
@@ -37,3 +54,6 @@
     </tr>
   </tbody>
 </table>
+</div>
+</div>
+</div>
