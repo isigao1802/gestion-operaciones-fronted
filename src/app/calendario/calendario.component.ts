@@ -24,14 +24,24 @@ import { environment } from '../../environments/config';
 export class CalendarioComponent implements OnInit {
 
   private URLPrincipal = environment.urlBase;
-  
+  sucursales: string[] = ['CASA MATRIZ', 'SUCURSAL ÑEMBY', 'SUCURSAL RUTA 1'];
+  totalRegistrosFiltrados: number = 0;
+// Dentro de tu componente TypeScript
+matchSearchCriteria(arg: any): boolean {
+  const titleMatch = arg.event.title.toLowerCase().includes(this.searchTitle.toLowerCase());
+  const descriptionMatch = arg.event.textColorFilter.toLowerCase().includes(this.searchDescription.toLowerCase());
+  return titleMatch && descriptionMatch;
+}
 
+  searchDescription: string = '';
   searchTitle: string = '';
   asesorFiltro: string = '';
   eventos: any[] = [];
   calendarVisible = signal(true);
   extraParams: any = {};
-  
+  textColorFilter: string = '';
+  sucursal: string = 'CASA MATRIZ';
+
   calendarOptions = signal<CalendarOptions>({
     plugins: [
       multiMonthPlugin,
@@ -69,7 +79,7 @@ export class CalendarioComponent implements OnInit {
     eventSources: [
       {
         url: this.URLPrincipal +'/eventos/buscarPorUde',
-        extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
+        extraParams: { ude: this.searchTitle, sucursal: this.sucursal }, // URL del endpoint en el Back
         success: this.handleSuccess.bind(this)
       }
     ],
@@ -77,7 +87,7 @@ export class CalendarioComponent implements OnInit {
   
   handleSuccess(response: any) {
     const url = (this.calendarOptions() as any).eventSources[0].url;
-  const extraParams = (this.calendarOptions() as any).eventSources[0].extraParams;
+    const extraParams = (this.calendarOptions() as any).eventSources[0].extraParams;
     console.log('Extra Params:', extraParams);
   }
 
@@ -91,6 +101,7 @@ export class CalendarioComponent implements OnInit {
   ngOnInit() {
     this.calendarVisible.set(true);
     console.log('Calendario:', this.calendarVisible);
+    this.totalRegistrosFiltrados=this.eventos.length;
     //this.buscar();
   
   }
@@ -104,10 +115,11 @@ export class CalendarioComponent implements OnInit {
 
   buscar() {
     console.log('searchTitle:', this.searchTitle);
-    this.eventoService.obtenerEventoPorUDE(this.searchTitle).subscribe(
+    this.eventoService.obtenerEventoPorUDE(this.searchTitle, this.sucursal).subscribe(
       (data) => {
         this.eventos = data;
         console.log('Eventos traidos con el filtro: ', this.eventos);
+        this.totalRegistrosFiltrados = this.eventos.length; 
         this.actualizarEventosEnCalendario();
        
       },
@@ -130,6 +142,8 @@ export class CalendarioComponent implements OnInit {
       (data) => {
         this.eventos = data;
         console.log('Eventos traidos desde el Back: ', this.eventos);
+        this.totalRegistrosFiltrados = this.eventos.length;
+        
         this.actualizarEventosEnCalendario();
       },
       (error) => {
@@ -155,7 +169,6 @@ actualizarEventosEnCalendario() {
         return null; 
       }
     }).filter(evento => evento !== null);
-
     console.log('Eventos actualizados:', updatedEvents);
     
     return {
@@ -164,7 +177,7 @@ actualizarEventosEnCalendario() {
           eventSources: [
       {
         url: this.URLPrincipal +'/eventos/buscarPorUde',
-        extraParams: { ude: this.searchTitle }, // URL del endpoint en el Back
+        extraParams: { ude: this.searchTitle, sucursal: this.sucursal },
         success: this.handleSuccess.bind(this)
       }
     ],

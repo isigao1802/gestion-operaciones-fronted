@@ -23,8 +23,10 @@ export class EventoService {
     return this.http.get<any>(`${this.apiUrl}/${asesor}`);
   }
 
-  obtenerEventoPorUDE(ude:string):Observable<any>{
-    const params = new HttpParams().set('ude', ude);
+  obtenerEventoPorUDE(ude:string, sucursal:string):Observable<any>{
+    const params = new HttpParams()
+      .set('ude', ude)
+      .set('sucursal', sucursal);
     console.log('Valor de params:', params.toString());
     return this.http.get(`${this.apiUrl}/buscarPorUde`,{ params: params  });
   }

@@ -1,33 +1,24 @@
-
 <div class='demo-app'>
-  <!--   
   <div class='demo-app-main'>
-    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
-      <ng-template #eventContent let-arg>
-        <i>{{ arg.event.title }}</i>
-        <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunion }}</i>
-      </ng-template>
-    </full-calendar>
-  </div>
- -->
-
- <div class='demo-app-main'>
-  <input type="text" [(ngModel)]="searchTitle" placeholder="Buscar por UDE">
-  <button (click)="buscar()">Buscar</button> 
-  <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
-    <ng-template #eventContent let-arg>
-      <div *ngIf="arg.event.title.toLowerCase().includes(searchTitle.toLowerCase())">
-        <i>{{ arg.event.title }}</i>
-        <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunion }}</i>
-        <i style="margin-left: 10px;">-</i>
-        <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunionCierre }}</i>
-      </div>
-    </ng-template>
-  </full-calendar>
-</div>
-
-
-
-
-
-
+   <div class="input-select-container">
+     <input type="text" [(ngModel)]="searchTitle" placeholder="Buscar por UDE..">
+     <select [(ngModel)]="sucursal" class="select-caja" (change)="buscar()">
+       <option *ngFor="let sucursal of sucursales" [value]="sucursal">{{ sucursal }}</option>
+     </select>
+     <button class="boton-buscar" (click)="buscar()">
+      <i class="fas fa-search"></i>
+      Buscar</button> 
+   </div>
+   <p *ngIf="totalRegistrosFiltrados > 0" class="mb-3">Se encontraron <strong>{{ totalRegistrosFiltrados }}</strong> registros.</p>
+   <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
+     <ng-template #eventContent let-arg>
+       <div *ngIf="arg.event.title.toLowerCase().includes(searchTitle.toLowerCase())">
+         <i>{{ arg.event.title }}</i>
+         <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunion }}</i>
+         <i style="margin-left: 10px;">-</i>
+         <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunionCierre }}</i>
+       </div>
+     </ng-template>
+   </full-calendar>
+ </div>
+ 
