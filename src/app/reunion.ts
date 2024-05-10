@@ -25,4 +25,5 @@ export class Reunion {
     horaReunionComienzo:string;
     conPrestamoInterno:string;
     duracionEstimada:number;
+    cantidadCuotas:number;
 }

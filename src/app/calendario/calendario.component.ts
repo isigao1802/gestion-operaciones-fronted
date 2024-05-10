@@ -14,6 +14,8 @@ import { EventoService } from '../evento.service';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/config';
+import { ReunionService } from '../reunion.service';
+import { Reunion } from '../reunion';
 
 @Component({
   selector: 'app-calendario',
@@ -26,7 +28,36 @@ export class CalendarioComponent implements OnInit {
   private URLPrincipal = environment.urlBase;
   sucursales: string[] = ['CASA MATRIZ', 'SUCURSAL ÑEMBY', 'SUCURSAL RUTA 1'];
   totalRegistrosFiltrados: number = 0;
-// Dentro de tu componente TypeScript
+  reunion:Reunion;
+  esUltimaReunion:Boolean = false;
+
+
+  /*logEventData(event: any) {
+    console.log('Evento:', event);
+    return ''; // Esto evita la salida adicional en el DOM
+  }
+*/
+  getTitleStyle(extendedProps: any) {
+    const cantidadCuotas = extendedProps.cantidadCuotas;
+    const nroCuota = extendedProps.nroCuota;
+    
+    // Lógica para determinar el color basado en cantidadCuotas y nroCuota
+    let color = '';
+    let backgroundColor = '';
+    if (cantidadCuotas === nroCuota) {
+      color = 'green';
+      backgroundColor = 'yellow';
+    }  else {
+      color = 'black'; 
+    }
+    
+    return {
+      'color': color,
+      'background-color': backgroundColor
+    };
+  }
+  
+
 matchSearchCriteria(arg: any): boolean {
   const titleMatch = arg.event.title.toLowerCase().includes(this.searchTitle.toLowerCase());
   const descriptionMatch = arg.event.textColorFilter.toLowerCase().includes(this.searchDescription.toLowerCase());
@@ -65,12 +96,12 @@ matchSearchCriteria(arg: any): boolean {
       }
     },
     initialView: 'listWeek',
-    slotMinTime: '08:00:00Z',
+    slotMinTime: '07:00:00Z',
     slotMaxTime: '17:30:00Z',
     initialEvents: this.eventos ,
     weekends: true,
     editable: false,
-    selectable: true,
+    selectable: false,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
@@ -86,16 +117,18 @@ matchSearchCriteria(arg: any): boolean {
   });
   
   handleSuccess(response: any) {
+   
     const url = (this.calendarOptions() as any).eventSources[0].url;
     const extraParams = (this.calendarOptions() as any).eventSources[0].extraParams;
     console.log('Extra Params:', extraParams);
-    this.totalRegistrosFiltrados = response.length; 
+    console.log('Objetos traidos:', response);
+    this.totalRegistrosFiltrados = response.length;
   }
 
   currentEvents = signal<EventApi[]>([]);
   
   private searchTitleSubscription: Subscription;
-  constructor(private changeDetector: ChangeDetectorRef, private eventoService: EventoService, private http: HttpClient) {
+  constructor( private reunionService: ReunionService, private changeDetector: ChangeDetectorRef, private eventoService: EventoService, private http: HttpClient) {
   }
 
   
@@ -150,6 +183,7 @@ matchSearchCriteria(arg: any): boolean {
     );
   }
   
+
 actualizarEventosEnCalendario() {
   this.calendarOptions.update(options => {
     this.totalRegistrosFiltrados = this.eventos.length; 
@@ -186,8 +220,6 @@ actualizarEventosEnCalendario() {
   });
 }
 
-  
-
   formatToISOWithOffset(date: Date | string): string {
     // Verificar si date es una cadena y convertirla a Date si es necesario
     const dateObject = typeof date === 'string' ? new Date(date) : date;
@@ -211,7 +243,6 @@ actualizarEventosEnCalendario() {
     }
   }
   
-
   handleCalendarToggle() {
     this.calendarVisible.update((bool) => !bool);
   }

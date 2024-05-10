@@ -13,7 +13,8 @@
    <full-calendar *ngIf='calendarVisible()' [options]='calendarOptions()'>
      <ng-template #eventContent let-arg>
        <div *ngIf="arg.event.title.toLowerCase().includes(searchTitle.toLowerCase())">
-         <i>{{ arg.event.title }}</i>
+       <!-- {{ logEventData(arg.event) }}-->
+         <i [ngStyle]="getTitleStyle(arg.event.extendedProps)">{{ arg.event.title }}</i>
          <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunion }}</i>
          <i style="margin-left: 10px;">-</i>
          <i style="margin-left: 10px;">{{ arg.event.extendedProps.horaReunionCierre }}</i>

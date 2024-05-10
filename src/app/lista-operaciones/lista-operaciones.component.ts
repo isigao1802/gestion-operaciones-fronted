@@ -25,7 +25,7 @@ export class ListaOperacionesComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.obtenerOperacionesPorTipos([901, 903, 905]);
+    this.obtenerOperacionesPorTipos([901,902,903,905]);
   }
 
 
