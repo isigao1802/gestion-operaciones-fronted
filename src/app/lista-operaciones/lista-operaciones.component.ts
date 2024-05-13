@@ -7,6 +7,7 @@ import { ReunionService } from '../reunion.service';
 import { Reunion } from '../reunion';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { filter, map  } from 'rxjs/operators';
+import { AsesorService } from '../asesor.service';
 
 @Component({
   selector: 'app-lista-operaciones',
@@ -14,18 +15,21 @@ import { filter, map  } from 'rxjs/operators';
   styleUrls: ['./lista-operaciones.component.css']
 })
 export class ListaOperacionesComponent implements OnInit {
-
+  
+  asesores: any[] = [];
   operaciones:Operacion[];
   reuniones:Reunion[];
   asesorFiltro: string = '';
   sucursalFiltro: string = 'CASA MATRIZ'; 
   totalRegistrosFiltrados: number = 0;
 
-  constructor(private operacionServicio:OperacionService,private router:Router, private reunionServicio:ReunionService) { }
+  constructor(private asesorServicio:AsesorService,private operacionServicio:OperacionService,
+    private router:Router, private reunionServicio:ReunionService) { }
 
   
   ngOnInit(): void {
     this.obtenerOperacionesPorTipos([901,902,903,905]);
+    this.obtenerAsesores();
   }
 
 
@@ -125,5 +129,20 @@ export class ListaOperacionesComponent implements OnInit {
 
   verDetallesDelaOperacion(nroCuenta:number){
     this.router.navigate(['operacion-detalles',nroCuenta]);
+  }
+
+  private obtenerAsesores() {
+    this.asesorServicio.obtenerAsesorServices().subscribe(dato => {
+      this.asesores = dato.sort((a, b) => {
+        if (a.nombre < b.nombre) {
+          return -1;
+        }
+        if (a.nombre > b.nombre) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log(this.asesores);
+    });
   }
 }
