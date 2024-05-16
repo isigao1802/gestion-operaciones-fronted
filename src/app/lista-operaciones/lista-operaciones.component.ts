@@ -21,6 +21,7 @@ export class ListaOperacionesComponent implements OnInit {
   reuniones:Reunion[];
   asesorFiltro: string = '';
   sucursalFiltro: string = 'CASA MATRIZ'; 
+  udeFiltro: string = '';
   totalRegistrosFiltrados: number = 0;
 
   constructor(private asesorServicio:AsesorService,private operacionServicio:OperacionService,
@@ -55,7 +56,8 @@ export class ListaOperacionesComponent implements OnInit {
     const operacionesFiltradas = this.operaciones.filter(operacion => {
       const filtroAsesor = !this.asesorFiltro || operacion.asesor.toLowerCase().includes(this.asesorFiltro.toLowerCase());
       const filtroSucursal = !this.sucursalFiltro || operacion.sucursal === this.sucursalFiltro;
-      return filtroAsesor && filtroSucursal;
+      const filtroUde = !this.udeFiltro || operacion.nombre_grupo.toLowerCase().includes(this.udeFiltro.toLowerCase());
+      return filtroAsesor && filtroSucursal && filtroUde;
     });
 
     this.totalRegistrosFiltrados = operacionesFiltradas.length; 

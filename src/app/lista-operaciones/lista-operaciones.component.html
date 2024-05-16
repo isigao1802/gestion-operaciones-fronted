@@ -2,11 +2,12 @@
 <h2>Listado de Operaciones</h2>
 
 <div class="d-flex align-items-center">
-  <!-- {{ logEventData(arg.event) }}
-  <div class="caja-input">
-    <input type="text" id="filtrarOperacionesPorAsesor" [(ngModel)]="asesorFiltro" placeholder="Buscar por Asesor..">
+  <div>
+    <select [(ngModel)]="asesorFiltro" class="select-caja">
+      <option value="" disabled selected>Seleccione un asesor</option>
+      <option *ngFor="let asesor of asesores" [value]="asesor.nombre">{{ asesor.nombre }}</option>
+    </select>
   </div>
--->
   <div>
     <select [(ngModel)]="sucursalFiltro" class="select-caja">
       <option value="CASA MATRIZ">CASA MATRIZ</option>
@@ -14,11 +15,8 @@
       <option value="SUCURSAL RUTA 1">SUCURSAL RUTA 1</option>
     </select>
   </div>
-  <div>
-    <select [(ngModel)]="asesorFiltro" class="select-caja">
-      <option value="" disabled selected>Seleccione un asesor</option>
-      <option *ngFor="let asesor of asesores" [value]="asesor.nombre">{{ asesor.nombre }}</option>
-    </select>
+  <div class="input-select-container">
+    <input type="text" [(ngModel)]="udeFiltro" placeholder="Buscar por UDE..">
   </div>
 </div>
 <div class="row">
