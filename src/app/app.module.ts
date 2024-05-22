@@ -29,6 +29,7 @@ import { AuthService } from './auth.service';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.component';
 import { ListarAuditoriaComponent } from './listar-auditoria/listar-auditoria.component';
+import { NumberFormatPipe } from './number-format.pipe';
 
 registerLocaleData(localeEs, 'es');
 
@@ -45,7 +46,8 @@ registerLocaleData(localeEs, 'es');
     ListarTareasComponent, 
     CalendarioComponent,
     ReunionDetallesComponent, 
-    ListarAuditoriaComponent
+    ListarAuditoriaComponent,
+    NumberFormatPipe 
     
   ],
   imports: [

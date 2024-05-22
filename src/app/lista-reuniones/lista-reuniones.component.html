@@ -4,75 +4,350 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Reuniones</title>
-  <!-- Agrega aquí tus enlaces a CSS y otras dependencias -->
 </head>
 <body>
-  <h2>Lista de Reuniones de la Operación N° {{ idOperacion }}</h2>
-  <button *ngIf="mostrarBotonAgregarHora" (click)="mostrarFormulario()" class="btn btn-primary">Añadir Hora de Reuniones</button>
+  <h2>Lista de Reuniones de la Operación N° {{ idOperacion }} </h2>
+  <h3><strong>UDE</strong> : {{ nombreGrupo }} </h3>
 
+  <button *ngIf="!mostrarBotonAgregarHora"(click)="verDetallesDelReglamento(idOperacion)" class="btn btn-secondary"> Ver Reglamento Interno</button>
   <!-- Formulario para añadir hora de reuniones -->
-  <div *ngIf="mostrarFormularioAgregarHora" class="formulario-agregar-hora">
-    <form (ngSubmit)="guardarReunion()" #reunionForm="ngForm">
-      <div class="form-group">
-        <div class="input-wrapper">
-          <label class="label-hora">Hora de Inicio de Reuniones:</label>
-          <input type="text" class="form-control input-centrado" id="horaReunion" [ngxTimepicker]="timepicker" [(ngModel)]="reunion.horaReunionAgendada" name="horaReunion" [value]="'08:00'" [format]="24" style="display: inline; width: 100px; margin-right: 8px;" readonly>
-          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
-          <mat-icon matSuffix style="cursor: pointer;" (click)="timepicker.open()">access_time</mat-icon>
+  <button *ngIf="mostrarBotonAgregarHora" (click)="mostrarFormulario()" class="btn btn-primary btn-margen">Añadir Reglamento Interno de la UDE</button>
+<div *ngIf="mostrarFormularioAgregarHora" class="formulario-agregar-hora">
+  <div class="ancho">
+    <div class="contenedor-todo">
+      <!--El titulo-->
+      <header class="encabezado">
+        <h1 id="title">Reglamento Interno <br></h1>
+      </header>
+      <!--Inicio formulario-->
+      <form (ngSubmit)="guardarReunion()" #reunionForm="ngForm" action="Formulario" class="contenedor-formulario" id="survey-form">
+        <!--Día de Reunión-->
+        <div class="componentesFormulario">
+          <p>Dia de Reunión:</p>
+          <select   
+            id="diaReunion"
+            [(ngModel)]="reglamento.diaReunion"
+            name="diaReunion"
+            #diaReunion="ngModel"
+            class="parteFormulario" title="selecion" required>
+            <option disabled selected value> Selecciona el día de Reunion</option>
+            <option value="LUNES">LUNES</option>
+            <option value="MARTES">MARTES</option>
+            <option value="MIÉRCOLES">MIÉRCOLES</option>
+            <option value="JUEVES">JUEVES</option>
+            <option value="VIERNES">VIERNES</option>
+            <option value="SÁBADO">SÁBADO</option>
+            <option value="DOMINGO">DOMINGO</option>
+          </select>   
         </div>
-      </div>
-      <div class="form-group">
-        <div class="input-wrapper">
-          <label class="label-prestamo" for="conPrestamoInterno" style="display: inline-block; width: 210px;">Tiene Préstamo Interno: </label>
-          <select class="form-control" style="text-align: center;" id="conPrestamoInterno" [(ngModel)]="reunion.conPrestamoInterno" name="conPrestamoInterno" required #conPrestamoInterno="ngModel" style="display: inline-block; width: 100px;" readonly>
-            <option value="SI" style="text-align: center;">SI</option>
-            <option value="NO" style="text-align: center;">NO</option>
-          </select>
-          <div class="alert alert-danger" *ngIf="conPrestamoInterno.invalid && (conPrestamoInterno.dirty || conPrestamoInterno.touched)">
-            <div *ngIf="conPrestamoInterno.errors.required">Seleccione una opción</div>
+        
+        <!-- Hora de Reunión-->
+        <div class="componentesFormulario"> 
+          <p>Hora de Inicio de Reuniones:</p>
+          <label for="horaReunionAgendada" id="horaReunionAgendada"></label>
+          <input 
+            [ngxTimepicker]="timepicker" 
+            [(ngModel)]="reunion.horaReunionAgendada" 
+            name="horaReunion"
+            type="text"  
+            [value]="'08:00'" 
+            [format]="24" 
+            style="display: inline; width: 470px; margin-right: 8px; height: 40px;"
+            class="timepicker-input"
+            required>
+          <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+          <mat-icon matSuffix (click)="timepicker.open()">access_time</mat-icon>
+        </div>
+
+        <!-- Tolerancia de Ingreso-->
+        <div class="componentesFormulario">
+          <p>Minutos de Tolerancia de Ingreso:</p>
+          <label for="minutosTolerancia"></label>
+          <input 
+            type="text" 
+            id="minutosTolerancia" 
+            [ngModel]="reglamento.minutosTolerancia | numberFormat" 
+            (ngModelChange)="onMinutosToleranciaChange($event)" 
+            name="minutosTolerancia"  
+            placeholder="Ingrese los minutos de Tolerancia" 
+            class="parteFormulario"
+            #minutosTolerancia="ngModel"
+            required>
+        </div>
+
+        <!-- Sanciones por Atraso a Socios-->
+        <div class="componentesFormulario">
+          <p>Sanciones por Atraso a Socios:</p>
+          <label for="sancionesAtrasoSocio"></label>
+          <input 
+            type="text" 
+            id="sancionesAtrasoSocio" 
+            [ngModel]="reglamento.sancionesAtrasoSocio | numberFormat" 
+            (ngModelChange)="onsancionesAtrasoSocioChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'sancionesAtrasoSocio')"
+            name="sancionesAtrasoSocio"  
+            placeholder="Ingrese el monto de la sanción" 
+            class="parteFormulario"
+            #sancionesAtrasoSocio="ngModel"
+            required>
+        </div>
+
+        <!-- Sanciones por Atraso a Directivos-->
+        <div class="componentesFormulario">
+          <p>Sanciones por Atraso a Directivos:</p>
+          <label for="sancionesAtrasoDirectiva"></label>
+          <input 
+            type="text" 
+            id="sancionesAtrasoDirectiva" 
+            [ngModel]="reglamento.sancionesAtrasoDirectiva | numberFormat" 
+            (ngModelChange)="onsancionesAtrasoDirectivaChange($event)"
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'sancionesAtrasoDirectiva')"  
+            name="sancionesAtrasoDirectiva"  
+            placeholder="Ingrese el monto de la sanción" 
+            class="parteFormulario"
+            #sancionesAtrasoDirectiva="ngModel"
+            required>
+        </div>
+
+        <!-- Número de licencias escritas-->
+        <div class="componentesFormulario">
+          <p>Número de licencias escritas:</p>
+          <label for="cantidadlicencia"></label>
+          <input 
+            type="number" 
+            id="cantidadlicencia" 
+            [ngModel]="reglamento.cantidadlicencia | numberFormat"  
+            name="cantidadlicencia"  
+            placeholder="Ingrese la cantidad de licencias escritas" 
+            class="parteFormulario"
+            #cantidadlicencia="ngModel"
+            required>
+        </div>      
+
+        <!-- Falta con Cuota abonada-->
+        <div class="componentesFormulario">
+          <p>Falta con Cuota Abonada</p>
+          <label for="faltaCuotaAbonada"></label>
+          <input 
+            type="text" 
+            id="faltaCuotaAbonada" 
+            [ngModel]="reglamento.faltaCuotaAbonada | numberFormat" 
+            (ngModelChange)="onfaltaCuotaAbonadaChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'faltaCuotaAbonada')"  
+            name="faltaCuotaAbonada"  
+            placeholder="Ingrese el monto de la falta" 
+            class="parteFormulario"
+            #faltaCuotaAbonada="ngModel"
+            required>
+        </div>     
+        
+        <!-- Falta con Cuota NO abonada-->
+        <div class="componentesFormulario">
+          <p>Falta con Cuota No Abonada</p>
+          <label for="faltaCuotaNoAbonada"></label>
+          <input 
+            type="text" 
+            id="faltaCuotaNoAbonada" 
+            [ngModel]="reglamento.faltaCuotaNoAbonada | numberFormat" 
+            (ngModelChange)="onfaltaCuotaNoAbonadaChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'faltaCuotaNoAbonada')"  
+            name="faltaCuotaNoAbonada"  
+            placeholder="Ingrese el monto de la falta" 
+            class="parteFormulario"
+            #faltaCuotaNoAbonada="ngModel"
+            required>
+        </div>
+
+        <!-- Tiene Préstamo Interno-->
+        <div class="componentesFormulario">
+          <p>Tiene Prestamo Interno?</p>
+          <div class="flex-container">
+            <label for="SI">
+              <input 
+                id="conPrestamoInternoSI"
+                [(ngModel)]="reunion.conPrestamoInterno"
+                name="conPrestamoInterno"
+                required
+                #conPrestamoInterno="ngModel"
+                type="radio" 
+                value="SI"
+                title="SI"
+                class="input-radio">
+              SI
+            </label>
+            <label for="NO">
+              <input 
+                id="conPrestamoInternoNO"
+                [(ngModel)]="reunion.conPrestamoInterno"
+                name="conPrestamoInterno"
+                required
+                #conPrestamoInterno="ngModel"
+                type="radio" 
+                value="NO"
+                title="NO"
+                class="input-radio">
+              NO
+            </label>
           </div>
         </div>
-      </div>
-      
-      <button class="btn btn-success" style="margin-right: 10px;">Registrar Horario</button>
-      <button (click)="cancelar()" class="btn btn-danger">Cancelar</button>
-    </form>
+
+        <!-- Contenedor Flex para los dos últimos inputs -->
+        <div class="componentesFormulario" *ngIf="reunion.conPrestamoInterno === 'SI'">
+          <div class="flex-container">
+            <!-- Interés de Préstamo Interno-->
+            <div>
+              <p>Interés de Prestamo Interno (%)</p>
+              <label for="interesPrestamoInterno"></label>
+              <input 
+                type="number" 
+                id="interesPrestamoInterno" 
+                [(ngModel)]="reglamento.interesPrestamoInterno" 
+                name="interesPrestamoInterno"  
+                placeholder="Porcentaje del interés" 
+                class="parteFormulario"
+                #interesPrestamoInterno="ngModel"
+                required>
+            </div>
+
+            <!-- Frecuencia de Préstamo Interno-->
+            <div>
+              <p>Frecuencia</p>
+              <label for="QUINCENAL">
+                <input 
+                  id="frecuenciaInteresPrestamoQUINCENAL"
+                  [(ngModel)]="reglamento.frecuenciaInteresPrestamo"
+                  name="frecuenciaInteresPrestamo"
+                  required
+                  #frecuenciaInteresPrestamo="ngModel"
+                  type="radio" 
+                  value="QUINCENAL"
+                  title="QUINCENAL"
+                  class="input-radio">
+                QUINCENAL
+              </label>
+              <label for="MENSUAL">
+                <input 
+                  id="frecuenciaInteresPrestamoMENSUAL"
+                  [(ngModel)]="reglamento.frecuenciaInteresPrestamo"
+                  name="frecuenciaInteresPrestamo"
+                  required
+                  #frecuenciaInteresPrestamo="ngModel"
+                  type="radio" 
+                  value="MENSUAL"
+                  title="MENSUAL"
+                  class="input-radio">
+                MENSUAL
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sanciones por Incumplimiento de Préstamo Interno-->
+        <div class="componentesFormulario">
+          <p>Sanciones por Incumplimiento de Préstamo Interno</p>
+          <label for="sancionesIncumplimientoPrestamo"></label>
+          <input 
+            type="text" 
+            id="sancionesIncumplimientoPrestamo" 
+            [ngModel]="reglamento.sancionesIncumplimientoPrestamo | numberFormat" 
+            (ngModelChange)="onsancionesIncumplimientoPrestamoChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'sancionesIncumplimientoPrestamo')"  
+            name="sancionesIncumplimientoPrestamo"  
+            placeholder="Ingrese el monto de la sanción" 
+            class="parteFormulario"
+            #sancionesIncumplimientoPrestamo="ngModel"
+            required>
+        </div>
+
+        <!-- Sanciones por Malas Relaciones-->
+        <div class="componentesFormulario">
+          <p>Sanciones por Malas Relaciones</p>
+          <label for="sancionesMalasRelaciones"></label>
+          <input 
+            type="text" 
+            id="sancionesMalasRelaciones" 
+            [ngModel]="reglamento.sancionesMalasRelaciones | numberFormat" 
+            (ngModelChange)="onsancionesMalasRelacionesChange($event)"  
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'sancionesMalasRelaciones')" 
+            name="sancionesMalasRelaciones"  
+            placeholder="Ingrese el monto de la sanción" 
+            class="parteFormulario"
+            #sancionesMalasRelaciones="ngModel"
+            required>
+        </div>
+
+        <!-- Duración de la Mesa Directiva-->
+        <div class="componentesFormulario">
+          <p>Duración de la Mesa Directiva</p>
+          <label for="duracionDirectiva"></label>
+          <input 
+            type="number" 
+            id="duracionDirectiva" 
+            [ngModel]="reglamento.duracionDirectiva | numberFormat" 
+            name="duracionDirectiva"  
+            placeholder="Ingrese la cantidad de ciclos" 
+            class="parteFormulario"
+            #duracionDirectiva="ngModel"
+            required>
+        </div>
+
+        <!-- Responsable de pagar faltante-->
+        <div class="componentesFormulario">
+          <p>En caso de Falta de una cuota, es Responsable de Pagar:</p>
+          <label for="responsablePagar"></label>
+          <input 
+            type="text" 
+            id="responsablePagar" 
+            [(ngModel)]="reglamento.responsablePagar" 
+            name="responsablePagar"  
+            placeholder="Ingrese la cantidad de ciclos" 
+            class="parteFormulario"
+            #responsablePagar="ngModel"
+            required>
+        </div>
+
+        <button class="btn btn-success" style="margin-right: 10px;" [disabled]="!reunionForm.valid">Guardar Reglamento</button>
+        <button (click)="cancelar()" class="btn btn-danger">Cancelar</button>
+      </form>
+    </div>
   </div>
-  
+</div>
 <!-- Hasta Aqui Formulario para añadir hora de reuniones -->
-
-
-
 
   <table class="table table-striped">
     <thead class="table-dark">
       <tr>
         <th style="text-align: center;">N° de Reunión</th>
-        <th>Nombre de Cliente</th>
-        <th>Asesor</th>
-        <th>Fecha de Reunión</th>
+     <!--   <th style="text-align: center;">Grupo</th> -->
+        <th style="text-align: center;">Asesor</th>
+        <th style="text-align: center;">Fecha de Reunión</th>
         <th style="text-align: center;">Estado</th>
         <th style="text-align: center;">Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let reunion of reuniones">
-        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nroCuota }}</td>
-        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nombreGrupo }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion), 'text-align': 'center'}">{{ reunion.nroCuota }}
+        </td>
+       <!-- <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.nombreGrupo }}</td> -->
         <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.asesor }}</td>
-        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.fechaDeReunion | date:'dd/MM/yyyy' }}</td>
-        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion)}">{{ reunion.estado }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion), 'text-align': 'center'}">{{ reunion.fechaDeReunion | date:'dd/MM/yyyy' }}</td>
+        <td [ngStyle]="{'color': getColorForConteo(reunion.conteoModificacion), 'font-style': getFontStyleForConteo(reunion.conteoModificacion), 'text-align': 'center'}">{{ reunion.estado }}</td>
         <td>
-          <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Ver Detalles</button>
+          <button (click)="verDetallesDelaReunion(reunion.idReunion)" class="btn btn-secondary" style="margin-right: 10px;">Detalles</button>
           <button *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" (click)="modificarReunion(reunion.idReunion)" class="btn btn-primary" style="margin-right: 10px;">Modificar</button>
            <!--<a *ngIf="reunion.estado === 'PENDIENTE'|| reunion.estado === 'POSPUESTO'" [routerLink]="['/operaciones/reuniones',  reunion.idReunion,reunion.idOperacion, 'listar-tareas']" class="btn btn-info" style="margin-right: 10px;">Iniciar</a>-->
           <a *ngIf="(reunion.estado === 'PENDIENTE' || reunion.estado === 'POSPUESTO') && reunion.horaReunionAgendada !== null" [routerLink]="['/operaciones/reuniones', reunion.idReunion, reunion.idOperacion, 'listar-tareas']" class="btn btn-info" style="margin-right: 10px;">Iniciar</a>
-
+          <!--<button *ngIf="!mostrarBotonAgregarHora"(click)="verDetallesDelReglamento(reunion.idOperacion)" class="btn btn-secondary">Reglamento</button>-->
         </td>
       </tr>
     </tbody>
   </table>
-
-  <!-- Agrega aquí tus scripts o enlaces a JavaScript si es necesario -->
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Reglamento</title>
+  <link rel="stylesheet" href="reglamento-detalles.component.css"> <!-- Vincula el archivo CSS externo -->
+</head>
+<body>
+  <div class="container">
+    <h3>Reglamento de la Operación N° <strong>{{ reglamento.idOperacion.toLocaleString('es-ES') }}</strong></h3>
+    <ul class="details-list">
+      <li class="details-item">
+        <span class="details-label">Día y Hora de la Reunión:</span>
+        <span class="details-value">{{ reglamento.diaReunion }} {{ reglamento.horaReunion }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Tolerancia de Ingreso:</span>
+        <span class="details-value">{{ reglamento.minutosTolerancia }} minutos</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Sanciones por Atraso: a Socios:</span>
+        <span class="details-value">{{ reglamento.sancionesAtrasoSocio.toLocaleString('es-ES') }}</span>
+        <span class="details-label">a Directiva:</span>
+        <span class="details-value">{{ reglamento.sancionesAtrasoDirectiva.toLocaleString('es-ES') }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Números de Licencias Escritas durante el tiempo del crédito:</span>
+        <span class="details-value">{{ reglamento.cantidadlicencia }} veces</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Falta con Cuota Abonada:</span>
+        <span class="details-value">Gs. {{ reglamento.faltaCuotaAbonada.toLocaleString('es-ES') }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Falta con Cuota No Abonada:</span>
+        <span class="details-value">Gs. {{ reglamento.faltaCuotaNoAbonada.toLocaleString('es-ES') }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Interés de Préstamo Interno:</span>
+        <span class="details-value">
+          {{ reglamento.interesPrestamoInterno.toLocaleString('es-ES') }} %
+          {{ reglamento.frecuenciaInteresPrestamo }}
+        </span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Sanciones por Incumplimiento de Préstamos Internos:</span>
+        <span class="details-value">Gs. {{ reglamento.sancionesIncumplimientoPrestamo.toLocaleString('es-ES') }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Sanciones por Malas Relaciones:</span>
+        <span class="details-value">Gs. {{ reglamento.sancionesMalasRelaciones.toLocaleString('es-ES') }}</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Los Préstamos Internos no cancelados en su tiempo deben ser pagados por los Garantes Obligatoriamente</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Totalmente prohibido sacar Créditos Internos, de la Unidad de Desarrollo, por personas que no estén presentes 
+          o para otras personas.
+        </span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">Duración de la Mesa Directiva:</span>
+        <span class="details-value">{{ reglamento.duracionDirectiva }} periodo(s)</span>
+      </li>
+      <li class="details-item">
+        <span class="details-label">En caso de Falta de una cuota, es Responsable de Pagar:</span>
+        <span class="details-value">{{ reglamento.responsablePagar }}</span>
+      </li>
+    </ul>
+    <button class="btn btn-danger" type="button" (click)="cancelar()" style="margin-right: 10px;">Atrás</button>
+  </div>
+</body>
+</html>

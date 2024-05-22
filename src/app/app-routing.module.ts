@@ -10,6 +10,7 @@ import { ReunionDetallesComponent } from './reunion-detalles/reunion-detalles.co
 import { ModificarReunionComponent } from './modificar-reunion/modificar-reunion.component';
 import { ListarTareasComponent } from './listar-tareas/listar-tareas.component';
 import { ListarAuditoriaComponent } from './listar-auditoria/listar-auditoria.component';
+import { ReglamentoDetallesComponent } from './reglamento-detalles/reglamento-detalles.component';
 
 const routes: Routes = [
   { path: 'auditorias', component: ListarAuditoriaComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'registrar-reunion', component: RegistrarReunionComponent },
   { path: 'operacion-detalles/:nroCuenta', component: OperacionDetallesComponent },
   { path: 'reunion-detalles/:idReunion', component: ReunionDetallesComponent },
+  { path: 'reglamento-detalles/:idReglamento', component: ReglamentoDetallesComponent },
   { path: 'operaciones/reuniones/:idReunion/:idOperacion/listar-tareas', component: ListarTareasComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
