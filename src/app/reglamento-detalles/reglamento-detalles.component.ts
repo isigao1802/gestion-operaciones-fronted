@@ -1,7 +1,7 @@
 import { OperacionService } from '../operacion.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReglamentoInternoService } from '../reglamento-interno.service';
+import { ReglamentoService } from '../reglamento.service';
 import { Reglamento } from '../reglamento';
 import { DatePipe } from '@angular/common';
 import { Location } from '@angular/common';
@@ -16,7 +16,7 @@ export class ReglamentoDetallesComponent implements OnInit{
 
   idReglamento:number;
   reglamento:Reglamento;
-  constructor(private location: Location, private datePipe: DatePipe, private route:ActivatedRoute,private operacionServicio:OperacionService, private reglamentoService:ReglamentoInternoService) { }
+  constructor(private location: Location, private datePipe: DatePipe, private route:ActivatedRoute,private operacionServicio:OperacionService, private reglamentoService:ReglamentoService) { }
 
 
   ngOnInit(): void {

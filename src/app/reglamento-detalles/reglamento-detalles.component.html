@@ -16,17 +16,17 @@
       </li>
       <li class="details-item">
         <span class="details-label">Tolerancia de Ingreso:</span>
-        <span class="details-value">{{ reglamento.minutosTolerancia }} minutos</span>
+        <span class="details-value">{{ reglamento.minutosTolerancia.toLocaleString('es-ES') }} minutos</span>
       </li>
       <li class="details-item">
         <span class="details-label">Sanciones por Atraso: a Socios:</span>
-        <span class="details-value">{{ reglamento.sancionesAtrasoSocio.toLocaleString('es-ES') }}</span>
+        <span class="details-value">Gs. {{ reglamento.sancionesAtrasoSocio.toLocaleString('es-ES') }}</span>
         <span class="details-label">a Directiva:</span>
-        <span class="details-value">{{ reglamento.sancionesAtrasoDirectiva.toLocaleString('es-ES') }}</span>
+        <span class="details-value">Gs. {{ reglamento.sancionesAtrasoDirectiva.toLocaleString('es-ES') }}</span>
       </li>
       <li class="details-item">
         <span class="details-label">Números de Licencias Escritas durante el tiempo del crédito:</span>
-        <span class="details-value">{{ reglamento.cantidadlicencia }} veces</span>
+        <span class="details-value">{{ reglamento.cantidadlicencia.toLocaleString('es-ES') }} veces</span>
       </li>
       <li class="details-item">
         <span class="details-label">Falta con Cuota Abonada:</span>
@@ -61,7 +61,7 @@
       </li>
       <li class="details-item">
         <span class="details-label">Duración de la Mesa Directiva:</span>
-        <span class="details-value">{{ reglamento.duracionDirectiva }} periodo(s)</span>
+        <span class="details-value">{{ reglamento.duracionDirectiva.toLocaleString('es-ES') }} periodo(s)</span>
       </li>
       <li class="details-item">
         <span class="details-label">En caso de Falta de una cuota, es Responsable de Pagar:</span>

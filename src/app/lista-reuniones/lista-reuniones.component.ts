@@ -2,7 +2,7 @@ import  swal  from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReunionService } from '../reunion.service';
-import { ReglamentoInternoService } from '../reglamento-interno.service';
+import { ReglamentoService } from '../reglamento.service';
 import { Reunion } from '../reunion';
 import { ActivatedRoute } from '@angular/router';
 import { Reglamento } from '../reglamento';
@@ -21,7 +21,7 @@ export class ListaReunionesComponent implements OnInit{
   reglamento:Reglamento = new Reglamento();
 
   
-  constructor(private reglamentoInternoService:ReglamentoInternoService,private route:ActivatedRoute,
+  constructor(private reglamentoService:ReglamentoService,private route:ActivatedRoute,
     private reunionServicio:ReunionService,private router:Router) { }
 
   ngOnInit(): void {
@@ -39,6 +39,10 @@ export class ListaReunionesComponent implements OnInit{
 
   onMinutosToleranciaChange(value: string) {
     this.reglamento.minutosTolerancia = parseFloat(value.replace(/,/g, ''));
+  }
+
+  oncantidadlicenciaChange(value: string) {
+    this.reglamento.cantidadlicencia = parseFloat(value.replace(/,/g, ''));
   }
 
   onsancionesAtrasoDirectivaChange(value: string) {
@@ -62,6 +66,11 @@ export class ListaReunionesComponent implements OnInit{
   onsancionesMalasRelacionesChange(value: string) {
     this.reglamento.sancionesMalasRelaciones = parseFloat(value.replace(/,/g, ''));
   }
+
+  onduracionDirectivaChange(value: string) {
+    this.reglamento.duracionDirectiva = parseFloat(value.replace(/,/g, ''));
+  }
+
 
   formatCurrency(event: any) {
     const value = event.target.value.replace(/\D/g, '');
@@ -209,7 +218,7 @@ export class ListaReunionesComponent implements OnInit{
     console.log("Datos de la reunion",this.reuniones);
     this.reglamento.idOperacion=this.idOperacion;
     this.reglamento.horaReunion=this.reunion.horaReunionAgendada;
-    this.reglamentoInternoService.registrarReglamento(this.reglamento).subscribe(dato => {
+    this.reglamentoService.registrarReglamento(this.reglamento).subscribe(dato => {
     },error => console.log(error));
 
     this.reunionServicio.actualizarHoraReunion(this.reuniones[0].idOperacion,this.reunion).subscribe(dato => {

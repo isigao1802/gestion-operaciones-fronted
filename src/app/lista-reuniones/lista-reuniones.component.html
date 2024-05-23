@@ -68,6 +68,8 @@
             id="minutosTolerancia" 
             [ngModel]="reglamento.minutosTolerancia | numberFormat" 
             (ngModelChange)="onMinutosToleranciaChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'minutosTolerancia')"
             name="minutosTolerancia"  
             placeholder="Ingrese los minutos de Tolerancia" 
             class="parteFormulario"
@@ -116,9 +118,12 @@
           <p>Número de licencias escritas:</p>
           <label for="cantidadlicencia"></label>
           <input 
-            type="number" 
+            type="text" 
             id="cantidadlicencia" 
             [ngModel]="reglamento.cantidadlicencia | numberFormat"  
+            (ngModelChange)="oncantidadlicenciaChange($event)" 
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'cantidadlicencia')"
             name="cantidadlicencia"  
             placeholder="Ingrese la cantidad de licencias escritas" 
             class="parteFormulario"
@@ -287,9 +292,12 @@
           <p>Duración de la Mesa Directiva</p>
           <label for="duracionDirectiva"></label>
           <input 
-            type="number" 
+            type="text" 
             id="duracionDirectiva" 
             [ngModel]="reglamento.duracionDirectiva | numberFormat" 
+            (ngModelChange)="onduracionDirectivaChange($event)"  
+            (input)="validateNumber($event)" 
+            (blur)="formatNumberInput($event, 'duracionDirectiva')" 
             name="duracionDirectiva"  
             placeholder="Ingrese la cantidad de ciclos" 
             class="parteFormulario"

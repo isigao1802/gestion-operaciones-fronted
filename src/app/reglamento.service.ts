@@ -9,7 +9,7 @@ import { Reglamento } from './reglamento';
 @Injectable({
   providedIn: 'root'
 })
-export class ReglamentoInternoService {
+export class ReglamentoService {
 
  private URLPrincipal = environment.urlBase;
   private baseURL = this.URLPrincipal + "/reglamentos";
@@ -29,9 +29,26 @@ export class ReglamentoInternoService {
   //este metodo nos sirve para registrar un reglamento;
   registrarReglamento(reglamento:Reglamento) : Observable<Object>{
     console.log("Reglamento " ,reglamento);
-    return this.httpClient.post(`${this.baseURL}/${this.guardar_reglamento}`,reglamento);
+    const reglamentoLimpio = this.limpiarYConvertirNumeros(reglamento);
+    console.log("Reglamento después de limpiar: ", reglamentoLimpio);
+    return this.httpClient.post(`${this.baseURL}/${this.guardar_reglamento}`,reglamentoLimpio);
   }
  
+
+  private limpiarYConvertirNumeros(obj: any): any {
+    const objLimpio = { ...obj };
+    for (const key in objLimpio) {
+      if (objLimpio.hasOwnProperty(key)) {
+        const value = objLimpio[key];
+        if (typeof value === 'string' && !isNaN(Number(value.replace(/,/g, '')))) {
+          // Convertir la cadena de texto a número después de eliminar comas
+          objLimpio[key] = Number(value.replace(/,/g, ''));
+        }
+      }
+    }
+    return objLimpio;
+  }
+
   //este metodo sirve para actualizar la operacion
   actualizarReglamento(idReglamento:number,reglamento:Reglamento) : Observable<Object>{
     return this.httpClient.put(`${this.baseURL}/${idReglamento}`,reglamento);
