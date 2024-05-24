@@ -26,4 +26,5 @@ export class Reunion {
     conPrestamoInterno:string;
     duracionEstimada:number;
     cantidadCuotas:number;
+    observacion:string;
 }

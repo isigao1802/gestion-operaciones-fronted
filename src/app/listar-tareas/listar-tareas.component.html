@@ -41,7 +41,15 @@
           <td>10</td>
           <td><input type="checkbox" id="adios" name="adios" [(ngModel)]="adiosChecked"></td>
         </tr>
+        <tr>
+          <td colspan="3">
+            <label for="observaciones">Observaciones:</label><br>
+            <textarea id="observaciones" name="observaciones" rows="4" style="width: 100%;" [(ngModel)]="observaciones"></textarea>
+          </td>
+        </tr>
       </table>
+      
+
       <div class="button-container">
         <button (click)="obtenerReunionesPorIdOperacion(operacion.idOperacion)" class="btn btn-danger" style="margin-right: 10px;">Volver a lista de Reuniones</button>
         <button (click)="botonCerrarReunion()" class="btn btn-success" style="margin-right: 10px;" [disabled]="!todosLosItemsMarcados()">Cerrar Reunión</button>

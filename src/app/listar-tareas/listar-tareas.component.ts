@@ -22,6 +22,8 @@ export class ListarTareasComponent implements OnInit{
   horaInicioReunion: Date;
   horaFinReunion: Date;
   tiempoTranscurrido: number;
+  observaciones: string='';
+  tieneObservacion: boolean = false;
 
   idReunion:number;
   idOperacion:number;
@@ -36,6 +38,7 @@ export class ListarTareasComponent implements OnInit{
     this.horaInicioReunion = new Date();
     this.horaInicioReunion.setHours(this.horaInicioReunion.getHours() - 4); //Ajustamos por la zona horaria.
     },error => console.log(error));
+    this.observaciones="Sin Observaciones";
   }
 
   operaciones:Operacion[];
@@ -44,7 +47,10 @@ export class ListarTareasComponent implements OnInit{
   constructor(private reunionService:ReunionService,private operacionServicio:OperacionService,private route:ActivatedRoute,private router:Router, private reunionServicio:ReunionService) { }
 
   todosLosItemsMarcados(): boolean {
-    return this.aperturaChecked && this.adoracionChecked && this.aprendizajeChecked && this.accionChecked && this.adiosChecked;
+    if(this.observaciones.length > 2){
+      this.tieneObservacion = true;
+    }
+    return this.aperturaChecked && this.aprendizajeChecked && this.accionChecked && this.adiosChecked;
   }
 
 
@@ -88,6 +94,8 @@ export class ListarTareasComponent implements OnInit{
       this.reunion.horaReunionComienzo=this.horaInicioReunion.toISOString();
       this.reunion.estado="CERRADA";
       this.reunion.horaReunionCierre=this.horaFinReunion.toISOString();
+      this.reunion.observacion=this.observaciones;
+      console.log("Reunión a cerrar: ",this.reunion);
       this.reunionService.actualizarReunion(this.idReunion,this.reunion).subscribe(dato => {
         console.log("Id Operación: ",this.idOperacion);
         this.obtenerReunionesPorIdOperacion(this.idOperacion); 
